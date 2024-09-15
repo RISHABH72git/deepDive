@@ -4,7 +4,7 @@ public class SlidingWindow {
 
     public static void main(String[] args) {
         SlidingWindow slidingWindow = new SlidingWindow();
-        int value = slidingWindow.Smallest_Subarray_with_a_given_sum_2(7, new int[]{2, 1, 5, 2, 3, 2});
+        int value = slidingWindow.Smallest_Subarray_with_a_given_sum_3(7, new int[]{2, 1, 5, 2, 3, 2});
         System.out.println(value);
     }
 
@@ -96,6 +96,21 @@ public class SlidingWindow {
 
     //Time Complexity O(n)
     public int Smallest_Subarray_with_a_given_sum_3(int s, int[] arr) {
-    return 0;
+        int sum = 0;
+        int start = 0;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            while (sum >= s) {
+                min = Math.min(min, i - start + 1);
+                sum -= arr[start];
+                start++;
+            }
+        }
+        return min == Integer.MAX_VALUE ? 0 : min;
+    }
+
+    public int Longest_Substring_with_K_Distinct_Characters(String element, int k) {
+        return 0;
     }
 }

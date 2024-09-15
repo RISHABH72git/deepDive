@@ -1,4 +1,5 @@
 package com.example.deepDive.kk.Tree.BinaryTree;
+
 import java.util.Scanner;
 
 public class BinaryTree {

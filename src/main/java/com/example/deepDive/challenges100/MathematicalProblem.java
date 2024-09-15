@@ -115,7 +115,7 @@ public class MathematicalProblem {
             int counter = 0;
             for (int j = 0; j < i; j++) {
                 if (count % element[j] == 0) {
-                    counter+=1;
+                    counter += 1;
                 }
                 if (counter == i) {
                     integerList.add(count);
