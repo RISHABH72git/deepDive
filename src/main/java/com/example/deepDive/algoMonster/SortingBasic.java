@@ -10,7 +10,8 @@ public class SortingBasic {
         List<Integer> unsortedList = Arrays.asList(4, 7, 1, 3, 9, 2);
         List<Integer> insertionSorted = insertionSort(unsortedList);
         List<Integer> selectionSorted = selectionSort(unsortedList);
-        System.out.println(selectionSorted);
+        List<Integer> bubbleSorted = bubbleSort(unsortedList);
+        System.out.println(bubbleSorted);
     }
 
     private static List<Integer> insertionSort(List<Integer> list) {
@@ -37,6 +38,24 @@ public class SortingBasic {
             int temp = list.get(i);
             list.set(i, list.get(minIndex));
             list.set(minIndex, temp);
+        }
+        return list;
+    }
+
+    private static List<Integer> bubbleSort(List<Integer> list) {
+        for (int i = list.size() - 1; i >= 0; i--) {
+            boolean swap = false;
+            for (int j = 0; j < i; j++) {
+                if (list.get(j) > list.get(j + 1)) {
+                    int temp = list.get(j);
+                    list.set(j, list.get(j + 1));
+                    list.set(j + 1, temp);
+                    swap = true;
+                }
+            }
+            if (!swap) {
+                return list;
+            }
         }
         return list;
     }
