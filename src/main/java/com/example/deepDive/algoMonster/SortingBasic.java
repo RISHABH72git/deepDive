@@ -1,5 +1,6 @@
 package com.example.deepDive.algoMonster;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -7,11 +8,12 @@ import java.util.List;
 public class SortingBasic {
 
     public static void main(String[] args) {
-        List<Integer> unsortedList = Arrays.asList(4, 7, 1, 3, 9, 2);
+        List<Integer> unsortedList = Arrays.asList(33, 4, 7, 1, 3, 9, 2, 0, 13);
         List<Integer> insertionSorted = insertionSort(unsortedList);
         List<Integer> selectionSorted = selectionSort(unsortedList);
         List<Integer> bubbleSorted = bubbleSort(unsortedList);
-        System.out.println(bubbleSorted);
+        List<Integer> mergedSorted = mergeSort(unsortedList, 0, unsortedList.size());
+        System.out.println(mergedSorted);
     }
 
     private static List<Integer> insertionSort(List<Integer> list) {
@@ -58,6 +60,34 @@ public class SortingBasic {
             }
         }
         return list;
+    }
+
+    private static List<Integer> mergeSort(List<Integer> list, int start, int end) {
+        if (end - start <= 1) {
+            return list.subList(start, end);
+        }
+        int mid = (start + end) / 2;
+        List<Integer> leftList = mergeSort(list, start, mid);
+        List<Integer> rightList = mergeSort(list, mid, end);
+
+        ArrayList<Integer> resultList = new ArrayList<>();
+        int leftPointer = 0, rightPointer = 0;
+        while (leftPointer < leftList.size() || rightPointer < rightList.size()) {
+            if (leftPointer == leftList.size()) {
+                resultList.add(rightList.get(rightPointer));
+                rightPointer++;
+            } else if (rightPointer == rightList.size()) {
+                resultList.add(leftList.get(leftPointer));
+                leftPointer++;
+            } else if (leftList.get(leftPointer) <= rightList.get(rightPointer)) {
+                resultList.add(leftList.get(leftPointer));
+                leftPointer++;
+            } else {
+                resultList.add(rightList.get(rightPointer));
+                rightPointer++;
+            }
+        }
+        return resultList;
     }
 
 }
