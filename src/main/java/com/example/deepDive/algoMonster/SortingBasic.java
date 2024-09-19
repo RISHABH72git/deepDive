@@ -1,9 +1,6 @@
 package com.example.deepDive.algoMonster;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class SortingBasic {
 
@@ -13,7 +10,21 @@ public class SortingBasic {
         List<Integer> selectionSorted = selectionSort(unsortedList);
         List<Integer> bubbleSorted = bubbleSort(unsortedList);
         List<Integer> mergedSorted = mergeSort(unsortedList, 0, unsortedList.size());
-        System.out.println(mergedSorted);
+        inBuildSort(unsortedList);
+//        System.out.println(mergedSorted);
+    }
+
+    private static void inBuildSort(List<Integer> list) {
+        Collections.sort(list);
+        System.out.println(list);
+        list.sort(Collections.reverseOrder());
+        System.out.println(list);
+        Collections.sort(list);
+        System.out.println(list);
+        Collections.reverse(list);
+        System.out.println(list);
+        list.sort((o1, o2) -> o2 - o1);
+        System.out.println(list);
     }
 
     private static List<Integer> insertionSort(List<Integer> list) {
