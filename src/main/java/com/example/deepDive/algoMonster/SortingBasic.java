@@ -7,11 +7,16 @@ public class SortingBasic {
     public static void main(String[] args) {
         List<Integer> unsortedList = Arrays.asList(33, 4, 7, 1, 3, 9, 2, 0, 13);
         List<Integer> insertionSorted = insertionSort(unsortedList);
+        System.out.println("insertion sorting :" + insertionSorted);
         List<Integer> selectionSorted = selectionSort(unsortedList);
+        System.out.println("selection sorting :" + selectionSorted);
         List<Integer> bubbleSorted = bubbleSort(unsortedList);
+        System.out.println("bubble sorting :" + bubbleSorted);
         List<Integer> mergedSorted = mergeSort(unsortedList, 0, unsortedList.size());
+        System.out.println("merge sorting :" + mergedSorted);
+        List<Integer> quickSorted = quickSort(unsortedList, 0, unsortedList.size());
+        System.out.println("quick sorting :" + quickSorted);
         inBuildSort(unsortedList);
-//        System.out.println(mergedSorted);
     }
 
     private static void inBuildSort(List<Integer> list) {
@@ -99,6 +104,39 @@ public class SortingBasic {
             }
         }
         return resultList;
+    }
+
+    private static List<Integer> quickSort(List<Integer> unsort, int start, int end) {
+        if (end - start <= 1) {
+            return unsort.subList(start, end);
+        }
+
+        int pivot = unsort.get(end - 1);
+
+        int startPtr = start, endPtr = end - 1;
+
+        while (startPtr < endPtr) {
+            while (unsort.get(startPtr) < pivot && startPtr < endPtr) {
+                startPtr++;
+            }
+
+            while (unsort.get(endPtr) >= pivot && startPtr < endPtr) {
+                endPtr--;
+            }
+
+            if (startPtr != endPtr) {
+                int temp = unsort.get(startPtr);
+                unsort.set(startPtr, unsort.get(endPtr));
+                unsort.set(endPtr, temp);
+            }
+        }
+        int temp = unsort.get(startPtr);
+        unsort.set(startPtr, unsort.get(end - 1));
+        unsort.set(end - 1, temp);
+
+        quickSort(unsort, start, startPtr);
+        quickSort(unsort, startPtr + 1, end);
+        return unsort;
     }
 
 }
