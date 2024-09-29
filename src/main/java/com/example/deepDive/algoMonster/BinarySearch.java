@@ -11,6 +11,7 @@ public class BinarySearch {
 //        System.out.println(binarySearch.firstTrueInSortedArray(List.of(false, false, false, false, true, true)));
         System.out.println(binarySearch.firstElementNotSmallerThanTarget(List.of(1, 3, 3, 5, 8, 9), 2));
         System.out.println(binarySearch.findElementInSortedArrayWithDuplicates(List.of(1, 3, 3, 5, 8, 9), 3));
+        System.out.println(binarySearch.squareRootEstimation( 8));
     }
 
     private int vanillaBinarySearch(List<Integer> arr, int target) {
@@ -78,5 +79,24 @@ public class BinarySearch {
             }
         }
         return output;
+    }
+
+    private int squareRootEstimation(int num) {
+        if (num == 0) return num;
+        int left = 1;
+        int right = num;
+        int res = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (mid == num / mid) {
+                return mid;
+            } else if (mid > num / mid) {
+                res = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return res - 1;
     }
 }
