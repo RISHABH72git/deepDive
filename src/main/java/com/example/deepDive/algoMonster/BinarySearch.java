@@ -13,6 +13,7 @@ public class BinarySearch {
         System.out.println(binarySearch.findElementInSortedArrayWithDuplicates(List.of(1, 3, 3, 5, 8, 9), 3));
         System.out.println(binarySearch.squareRootEstimation(8));
         System.out.println(binarySearch.findMinimumInRotatedSortedArray(List.of(3, 5, 7, 11, 13, 17, 19, 2)));
+        System.out.println(binarySearch.peakMountainArray(List.of(0, 10, 3, 2, 1, 0)));
     }
 
     private int vanillaBinarySearch(List<Integer> arr, int target) {
@@ -108,6 +109,23 @@ public class BinarySearch {
         while (left <= right) {
             int mid = left + (right - left) / 2;
             if (list.get(mid) <= list.get(list.size() - 1)) {
+                output = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return output;
+    }
+
+    private int peakMountainArray(List<Integer> list) {
+        int left = 0;
+        int right = list.size() - 1;
+        int output = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (list.get(mid) >= list.get(mid + 1)) {
                 output = mid;
                 right = mid - 1;
             } else {
