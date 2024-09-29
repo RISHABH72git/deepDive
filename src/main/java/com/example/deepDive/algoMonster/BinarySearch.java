@@ -11,7 +11,8 @@ public class BinarySearch {
 //        System.out.println(binarySearch.firstTrueInSortedArray(List.of(false, false, false, false, true, true)));
         System.out.println(binarySearch.firstElementNotSmallerThanTarget(List.of(1, 3, 3, 5, 8, 9), 2));
         System.out.println(binarySearch.findElementInSortedArrayWithDuplicates(List.of(1, 3, 3, 5, 8, 9), 3));
-        System.out.println(binarySearch.squareRootEstimation( 8));
+        System.out.println(binarySearch.squareRootEstimation(8));
+        System.out.println(binarySearch.findMinimumInRotatedSortedArray(List.of(3, 5, 7, 11, 13, 17, 19, 2)));
     }
 
     private int vanillaBinarySearch(List<Integer> arr, int target) {
@@ -98,5 +99,21 @@ public class BinarySearch {
             }
         }
         return res - 1;
+    }
+
+    private int findMinimumInRotatedSortedArray(List<Integer> list) {
+        int left = 0;
+        int right = list.size() - 1;
+        int output = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (list.get(mid) <= list.get(list.size() - 1)) {
+                output = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return output;
     }
 }
