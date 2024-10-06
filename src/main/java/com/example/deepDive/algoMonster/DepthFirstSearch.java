@@ -32,11 +32,25 @@ public class DepthFirstSearch {
         return Math.max(dfsTreeMaxDepth(root.left), dfsTreeMaxDepth(root.right)) + 1;
     }
 
+    private static int visibleTreeNodes(Node root, int max) {
+        if (root == null) {
+            return 0;
+        }
+        int total = 0;
+        if (root.val >= max) {
+            total++;
+        }
+        total += visibleTreeNodes(root.left, Math.max(max, root.val));
+        total += visibleTreeNodes(root.right, Math.max(max, root.val));
+        return total;
+    }
+
     public static void main(String[] args) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
         Node node = new Node(5, left, right);
         System.out.println(dfs(node, 9));
         System.out.println(treeMaxDepth(node));
+        System.out.println(visibleTreeNodes(node, Integer.MIN_VALUE));
     }
 }
