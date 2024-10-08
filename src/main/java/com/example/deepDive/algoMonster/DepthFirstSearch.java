@@ -61,6 +61,13 @@ public class DepthFirstSearch {
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
+    private static Node invertBinaryTree(Node root) {
+        if (root == null) {
+            return null;
+        }
+        return new Node(root.val, invertBinaryTree(root.right), invertBinaryTree(root.left));
+    }
+
     public static void main(String[] args) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -69,5 +76,6 @@ public class DepthFirstSearch {
         System.out.println(treeMaxDepth(node));
         System.out.println(visibleTreeNodes(node, Integer.MIN_VALUE));
         System.out.println(balanceBinaryTree(node) != -1);
+        Node inverted = invertBinaryTree(node);
     }
 }
