@@ -45,6 +45,22 @@ public class DepthFirstSearch {
         return total;
     }
 
+    private static int balanceBinaryTree(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftHeight = balanceBinaryTree(root.left);
+        int rightHeight = balanceBinaryTree(root.right);
+
+        if (leftHeight == -1 || rightHeight == -1) {
+            return -1;
+        }
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
+        }
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
     public static void main(String[] args) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -52,5 +68,6 @@ public class DepthFirstSearch {
         System.out.println(dfs(node, 9));
         System.out.println(treeMaxDepth(node));
         System.out.println(visibleTreeNodes(node, Integer.MIN_VALUE));
+        System.out.println(balanceBinaryTree(node) != -1);
     }
 }
