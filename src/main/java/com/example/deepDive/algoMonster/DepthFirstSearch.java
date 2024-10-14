@@ -68,6 +68,23 @@ public class DepthFirstSearch {
         return new Node(root.val, invertBinaryTree(root.right), invertBinaryTree(root.left));
     }
 
+    private static boolean subTreeOfAnotherTree(Node root , Node subTree){
+        if (root == null){
+            return false;
+        }
+        return checkTree(root, subTree) || subTreeOfAnotherTree(root.left, subTree) || subTreeOfAnotherTree(root.right, subTree);
+    }
+
+    private static boolean checkTree(Node root, Node subTree) {
+        if (root == null && subTree == null){
+            return true;
+        }
+        if (root == null || subTree == null){
+            return false;
+        }
+        return root.val.equals(subTree.val) && checkTree(root.left, subTree.left) && checkTree(root.right, subTree.right);
+    }
+
     public static void main(String[] args) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -77,5 +94,6 @@ public class DepthFirstSearch {
         System.out.println(visibleTreeNodes(node, Integer.MIN_VALUE));
         System.out.println(balanceBinaryTree(node) != -1);
         Node inverted = invertBinaryTree(node);
+        System.out.println(subTreeOfAnotherTree(node, left));
     }
 }

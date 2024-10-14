@@ -1,4 +1,4 @@
-# deepDive
+# DeepDive
 
 ## Overview
 
