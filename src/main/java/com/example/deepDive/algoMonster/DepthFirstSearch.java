@@ -85,6 +85,20 @@ public class DepthFirstSearch {
         return root.val.equals(subTree.val) && checkTree(root.left, subTree.left) && checkTree(root.right, subTree.right);
     }
 
+    public static boolean validBST(Node root){
+        return valid_BST_DFS(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private static boolean valid_BST_DFS(Node root, int minValue, int maxValue) {
+        if(root == null){
+            return true;
+        }
+        if(!(minValue < root.val && root.val > maxValue)){
+            return false;
+        }
+        return valid_BST_DFS(root.left, minValue, root.val) && valid_BST_DFS(root.right, root.val, maxValue);
+    }
+
     public static void main(String[] args) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -95,5 +109,6 @@ public class DepthFirstSearch {
         System.out.println(balanceBinaryTree(node) != -1);
         Node inverted = invertBinaryTree(node);
         System.out.println(subTreeOfAnotherTree(node, left));
+        System.out.println(validBST(node));
     }
 }
