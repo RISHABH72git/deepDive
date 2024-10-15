@@ -68,35 +68,47 @@ public class DepthFirstSearch {
         return new Node(root.val, invertBinaryTree(root.right), invertBinaryTree(root.left));
     }
 
-    private static boolean subTreeOfAnotherTree(Node root , Node subTree){
-        if (root == null){
+    private static boolean subTreeOfAnotherTree(Node root, Node subTree) {
+        if (root == null) {
             return false;
         }
         return checkTree(root, subTree) || subTreeOfAnotherTree(root.left, subTree) || subTreeOfAnotherTree(root.right, subTree);
     }
 
     private static boolean checkTree(Node root, Node subTree) {
-        if (root == null && subTree == null){
+        if (root == null && subTree == null) {
             return true;
         }
-        if (root == null || subTree == null){
+        if (root == null || subTree == null) {
             return false;
         }
         return root.val.equals(subTree.val) && checkTree(root.left, subTree.left) && checkTree(root.right, subTree.right);
     }
 
-    public static boolean validBST(Node root){
+    public static boolean validBST(Node root) {
         return valid_BST_DFS(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     private static boolean valid_BST_DFS(Node root, int minValue, int maxValue) {
-        if(root == null){
+        if (root == null) {
             return true;
         }
-        if(!(minValue < root.val && root.val > maxValue)){
+        if (!(minValue < root.val && root.val > maxValue)) {
             return false;
         }
         return valid_BST_DFS(root.left, minValue, root.val) && valid_BST_DFS(root.right, root.val, maxValue);
+    }
+
+    public static Node insertBST(Node node, int val) {
+        if (node == null) {
+            return new Node(val, null, null);
+        }
+        if (node.val > val) {
+            node.left = insertBST(node.left, val);
+        } else {
+            node.right = insertBST(node.right, val);
+        }
+        return node;
     }
 
     public static void main(String[] args) {
@@ -110,5 +122,6 @@ public class DepthFirstSearch {
         Node inverted = invertBinaryTree(node);
         System.out.println(subTreeOfAnotherTree(node, left));
         System.out.println(validBST(node));
+        System.out.println(insertBST(node, 10));
     }
 }
