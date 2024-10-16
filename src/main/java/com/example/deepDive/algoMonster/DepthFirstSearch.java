@@ -111,6 +111,16 @@ public class DepthFirstSearch {
         return node;
     }
 
+    public static int lowestCommonAncestorBST(Node node, int p, int q) {
+        if (p < node.val && q < node.val) {
+            return lowestCommonAncestorBST(node.left, p, q);
+        } else if (p > node.val && q > node.val) {
+            return lowestCommonAncestorBST(node.right, p, q);
+        } else {
+            return node.val;
+        }
+    }
+
     public static void main(String[] args) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -123,5 +133,6 @@ public class DepthFirstSearch {
         System.out.println(subTreeOfAnotherTree(node, left));
         System.out.println(validBST(node));
         System.out.println(insertBST(node, 10));
+        System.out.println(lowestCommonAncestorBST(node, 3, 8));
     }
 }
