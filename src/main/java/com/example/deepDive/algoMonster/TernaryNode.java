@@ -54,7 +54,7 @@ public class TernaryNode {
             res.add(path.stream().map(Object::toString).collect(Collectors.joining()));
             return;
         }
-        for (char letter : new char[] {'a', 'b'}){
+        for (char letter : new char[] {'a', 'b', 'c', 'd'}){
             path.add(letter);
             combinatorialSearchProblemsRecursion(n, res, startIndex +1, path);
             path.remove(startIndex);
