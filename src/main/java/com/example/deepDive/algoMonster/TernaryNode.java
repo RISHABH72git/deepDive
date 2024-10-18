@@ -2,6 +2,7 @@ package com.example.deepDive.algoMonster;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TernaryNode {
     private int val;
@@ -48,6 +49,23 @@ public class TernaryNode {
         return res;
     }
 
+    private static void combinatorialSearchProblemsRecursion(Integer n, List<String> res, int startIndex, List<Character> path){
+        if(startIndex == n){
+            res.add(path.stream().map(Object::toString).collect(Collectors.joining()));
+            return;
+        }
+        for (char letter : new char[] {'a', 'b'}){
+            path.add(letter);
+            combinatorialSearchProblemsRecursion(n, res, startIndex +1, path);
+            path.remove(startIndex);
+        }
+    }
+    public static List<String> combinatorialSearchProblems(Integer n){
+        List<String> res = new ArrayList<>();
+        combinatorialSearchProblemsRecursion(n, res, 0 , new ArrayList<>());
+        return res;
+    }
+
     public static void main(String[] args) {
         TernaryNode last = new TernaryNode(3);
         TernaryNode first = new TernaryNode(2, List.of(last));
@@ -56,5 +74,8 @@ public class TernaryNode {
         TernaryNode ternaryNode = new TernaryNode(1, List.of(first, second, third));
         traverse(ternaryNode);
         System.out.println(ternaryTreePaths(ternaryNode));
+        System.out.println(combinatorialSearchProblems(2));
     }
+
+
 }
