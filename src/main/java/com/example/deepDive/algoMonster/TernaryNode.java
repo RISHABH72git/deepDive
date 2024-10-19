@@ -50,22 +50,24 @@ public class TernaryNode {
         return res;
     }
 
-    private static void combinatorialSearchProblemsRecursion(Integer n, List<String> res, int startIndex, List<Character> path){
-        if(startIndex == n){
+    private static void combinatorialSearchProblemsRecursion(Integer n, List<String> res, int startIndex, List<Character> path) {
+        if (startIndex == n) {
             res.add(path.stream().map(Object::toString).collect(Collectors.joining()));
             return;
         }
-        for (char letter : new char[] {'a', 'b', 'c', 'd'}){
+        for (char letter : new char[]{'a', 'b', 'c', 'd'}) {
             path.add(letter);
-            combinatorialSearchProblemsRecursion(n, res, startIndex +1, path);
+            combinatorialSearchProblemsRecursion(n, res, startIndex + 1, path);
             path.remove(startIndex);
         }
     }
-    public static List<String> combinatorialSearchProblems(Integer n){
+
+    public static List<String> combinatorialSearchProblems(Integer n) {
         List<String> res = new ArrayList<>();
-        combinatorialSearchProblemsRecursion(n, res, 0 , new ArrayList<>());
+        combinatorialSearchProblemsRecursion(n, res, 0, new ArrayList<>());
         return res;
     }
+
     private static final Map<Character, char[]> KEYBOARD = Map.of(
             '2', "abc".toCharArray(),
             '3', "def".toCharArray(),
@@ -76,23 +78,58 @@ public class TernaryNode {
             '8', "tuv".toCharArray(),
             '9', "wxyz".toCharArray());
 
-    private static void generateAllLetterCombinationsFromPhoneNumberRecursion(String digits, List<String> res, StringBuilder path, int startIndex){
-        if (digits.length() == startIndex){
+    private static void generateAllLetterCombinationsFromPhoneNumberRecursion(String digits, List<String> res, StringBuilder path, int startIndex) {
+        if (digits.length() == startIndex) {
             res.add(path.toString());
             return;
         }
         char number = digits.charAt(startIndex);
-        for (char alpha :  KEYBOARD.get(number)){
+        for (char alpha : KEYBOARD.get(number)) {
             path.append(alpha);
-            generateAllLetterCombinationsFromPhoneNumberRecursion(digits, res, path, startIndex +1);
-            path.deleteCharAt(path.length() -1);
+            generateAllLetterCombinationsFromPhoneNumberRecursion(digits, res, path, startIndex + 1);
+            path.deleteCharAt(path.length() - 1);
         }
     }
 
-    public static List<String> generateAllLetterCombinationsFromPhoneNumber(String digits){
+    public static List<String> generateAllLetterCombinationsFromPhoneNumber(String digits) {
         List<String> res = new ArrayList<>();
         StringBuilder path = new StringBuilder();
         generateAllLetterCombinationsFromPhoneNumberRecursion(digits, res, path, 0);
+        return res;
+    }
+
+    private static void partitioningAStringIntoPalindromesRecursion(List<List<String>> res, ArrayList<String> part, String s, int start) {
+        if (start == s.length()) {
+            List<String> list = new ArrayList<>(part);
+            res.add(list);
+            return;
+        }
+        for (int end = start; end < s.length(); end++) {
+            if (isPalindrome(s.substring(start, end + 1))) {
+                part.add(s.substring(start, end + 1));
+                partitioningAStringIntoPalindromesRecursion(res, part, s, end + 1);
+                part.remove(part.size() - 1);
+            }
+        }
+
+    }
+
+    private static boolean isPalindrome(String substring) {
+        int l = 0;
+        int r = substring.length() - 1;
+        while (l < r) {
+            if (substring.charAt(l) != substring.charAt(r)) {
+                return false;
+            }
+            l++;
+            r--;
+        }
+        return true;
+    }
+
+    public static List<List<String>> partitioningAStringIntoPalindromes(String s) {
+        List<List<String>> res = new ArrayList<>();
+        partitioningAStringIntoPalindromesRecursion(res, new ArrayList<String>(), s, 0);
         return res;
     }
 
@@ -106,6 +143,7 @@ public class TernaryNode {
         System.out.println(ternaryTreePaths(ternaryNode));
         System.out.println(combinatorialSearchProblems(2));
         System.out.println(generateAllLetterCombinationsFromPhoneNumber("5637"));
+        System.out.println(partitioningAStringIntoPalindromes("aabaa"));
     }
 
 
