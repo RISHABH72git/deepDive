@@ -2,6 +2,7 @@ package com.example.deepDive.algoMonster;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TernaryNode {
@@ -65,6 +66,35 @@ public class TernaryNode {
         combinatorialSearchProblemsRecursion(n, res, 0 , new ArrayList<>());
         return res;
     }
+    private static final Map<Character, char[]> KEYBOARD = Map.of(
+            '2', "abc".toCharArray(),
+            '3', "def".toCharArray(),
+            '4', "ghi".toCharArray(),
+            '5', "jkl".toCharArray(),
+            '6', "mno".toCharArray(),
+            '7', "pqrs".toCharArray(),
+            '8', "tuv".toCharArray(),
+            '9', "wxyz".toCharArray());
+
+    private static void generateAllLetterCombinationsFromPhoneNumberRecursion(String digits, List<String> res, StringBuilder path, int startIndex){
+        if (digits.length() == startIndex){
+            res.add(path.toString());
+            return;
+        }
+        char number = digits.charAt(startIndex);
+        for (char alpha :  KEYBOARD.get(number)){
+            path.append(alpha);
+            generateAllLetterCombinationsFromPhoneNumberRecursion(digits, res, path, startIndex +1);
+            path.deleteCharAt(path.length() -1);
+        }
+    }
+
+    public static List<String> generateAllLetterCombinationsFromPhoneNumber(String digits){
+        List<String> res = new ArrayList<>();
+        StringBuilder path = new StringBuilder();
+        generateAllLetterCombinationsFromPhoneNumberRecursion(digits, res, path, 0);
+        return res;
+    }
 
     public static void main(String[] args) {
         TernaryNode last = new TernaryNode(3);
@@ -75,6 +105,7 @@ public class TernaryNode {
         traverse(ternaryNode);
         System.out.println(ternaryTreePaths(ternaryNode));
         System.out.println(combinatorialSearchProblems(2));
+        System.out.println(generateAllLetterCombinationsFromPhoneNumber("5637"));
     }
 
 
