@@ -1,5 +1,8 @@
 package com.example.deepDive.algoMonster;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DepthFirstSearch {
     public static Node dfs(Node root, int target) {
         if (root == null) {
@@ -119,6 +122,15 @@ public class DepthFirstSearch {
         } else {
             return node.val;
         }
+    }
+
+    public static List<String> generateParentheses(int n) {
+        List<String> res = new ArrayList<>();
+        generateParenthesesRecursion(0, new ArrayList<>(), 0, 0, res, n);
+        return res;
+    }
+
+    private static void generateParenthesesRecursion(int startIndex, List<Character> path, int open, int close, List<String> res, int n) {
     }
 
     public static void main(String[] args) {
