@@ -2,6 +2,7 @@ package com.example.deepDive.algoMonster;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DepthFirstSearch {
     public static Node dfs(Node root, int target) {
@@ -131,6 +132,20 @@ public class DepthFirstSearch {
     }
 
     private static void generateParenthesesRecursion(int startIndex, List<Character> path, int open, int close, List<String> res, int n) {
+        if(path.size() == 2*n){
+            res.add(path.stream().map(Object::toString).collect(Collectors.joining()));
+            return;
+        }
+        if (open < n){
+            path.add('(');
+            generateParenthesesRecursion(startIndex, path, open +1, close, res, n);
+            path.remove(path.size()-1);
+        }
+        if (close < open){
+            path.add(')');
+            generateParenthesesRecursion(startIndex, path, open, close+1, res, n);
+            path.remove(path.size()-1);
+        }
     }
 
     public static void main(String[] args) {
@@ -146,5 +161,6 @@ public class DepthFirstSearch {
         System.out.println(validBST(node));
         System.out.println(insertBST(node, 10));
         System.out.println(lowestCommonAncestorBST(node, 3, 8));
+        System.out.println(generateParentheses(3));
     }
 }
