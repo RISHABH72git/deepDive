@@ -148,6 +148,31 @@ public class DepthFirstSearch {
         }
     }
 
+    private static List<String> generalAllPermutations(String letter){
+        List<String> res = new ArrayList<>();
+        List<Character> path = new ArrayList<>();
+        char [] letterChar = letter.toCharArray();
+        generalAllPermutationsRecursion(res, 0, new boolean[letterChar.length], path, letterChar);
+        return res;
+    }
+
+    private static void generalAllPermutationsRecursion(List<String> res, int startIndex, boolean[] used, List<Character> path, char[] letterChar) {
+        if (startIndex == used.length){
+            res.add(path.stream().map(Object::toString).collect(Collectors.joining()));
+            return;
+        }
+        for (int i = 0; i < used.length; i++) {
+            if (used[i]){
+                continue;
+            }
+            path.add(letterChar[i]);
+            used[i] = true;
+            generalAllPermutationsRecursion(res,startIndex+1, used, path, letterChar);
+            used[i] = false;
+            path.remove(path.size()-1);
+        }
+    }
+
     public static void main(String[] args) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -162,5 +187,6 @@ public class DepthFirstSearch {
         System.out.println(insertBST(node, 10));
         System.out.println(lowestCommonAncestorBST(node, 3, 8));
         System.out.println(generateParentheses(3));
+        System.out.println(generalAllPermutations("abcd"));
     }
 }
