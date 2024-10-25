@@ -132,45 +132,57 @@ public class DepthFirstSearch {
     }
 
     private static void generateParenthesesRecursion(int startIndex, List<Character> path, int open, int close, List<String> res, int n) {
-        if(path.size() == 2*n){
+        if (path.size() == 2 * n) {
             res.add(path.stream().map(Object::toString).collect(Collectors.joining()));
             return;
         }
-        if (open < n){
+        if (open < n) {
             path.add('(');
-            generateParenthesesRecursion(startIndex, path, open +1, close, res, n);
-            path.remove(path.size()-1);
+            generateParenthesesRecursion(startIndex, path, open + 1, close, res, n);
+            path.remove(path.size() - 1);
         }
-        if (close < open){
+        if (close < open) {
             path.add(')');
-            generateParenthesesRecursion(startIndex, path, open, close+1, res, n);
-            path.remove(path.size()-1);
+            generateParenthesesRecursion(startIndex, path, open, close + 1, res, n);
+            path.remove(path.size() - 1);
         }
     }
 
-    private static List<String> generalAllPermutations(String letter){
+    private static List<String> generalAllPermutations(String letter) {
         List<String> res = new ArrayList<>();
         List<Character> path = new ArrayList<>();
-        char [] letterChar = letter.toCharArray();
+        char[] letterChar = letter.toCharArray();
         generalAllPermutationsRecursion(res, 0, new boolean[letterChar.length], path, letterChar);
         return res;
     }
 
     private static void generalAllPermutationsRecursion(List<String> res, int startIndex, boolean[] used, List<Character> path, char[] letterChar) {
-        if (startIndex == used.length){
+        if (startIndex == used.length) {
             res.add(path.stream().map(Object::toString).collect(Collectors.joining()));
             return;
         }
         for (int i = 0; i < used.length; i++) {
-            if (used[i]){
+            if (used[i]) {
                 continue;
             }
             path.add(letterChar[i]);
             used[i] = true;
-            generalAllPermutationsRecursion(res,startIndex+1, used, path, letterChar);
+            generalAllPermutationsRecursion(res, startIndex + 1, used, path, letterChar);
             used[i] = false;
-            path.remove(path.size()-1);
+            path.remove(path.size() - 1);
         }
+    }
+
+    private static int fibo(int num, int[] memo) {
+        if (memo[num] != 0) {
+            return memo[num];
+        }
+        if (num == 1 || num == 0) {
+            return num;
+        }
+        int res = fibo(num - 1, memo) + fibo(num - 2, memo);
+        memo[num] = res;
+        return res;
     }
 
     public static void main(String[] args) {
@@ -188,5 +200,6 @@ public class DepthFirstSearch {
         System.out.println(lowestCommonAncestorBST(node, 3, 8));
         System.out.println(generateParentheses(3));
         System.out.println(generalAllPermutations("abcd"));
+        System.out.println(fibo(6, new int[20]));
     }
 }
