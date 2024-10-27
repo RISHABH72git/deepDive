@@ -185,6 +185,27 @@ public class DepthFirstSearch {
         return res;
     }
 
+    public static boolean wordBreak(String s, List<String> words) {
+        return wordBreakRecursion(0, new Boolean[s.length()], s, words);
+    }
+
+    private static boolean wordBreakRecursion(int startIndex, Boolean[] memo, String target, List<String> words) {
+        if (startIndex == target.length()) {
+            return true;
+        }
+        if (memo[startIndex] != null){
+            return memo[startIndex];
+        }
+        boolean ans = false;
+        for (String word : words) {
+            if (target.substring(startIndex).startsWith(word)) {
+                ans = ans || wordBreakRecursion(startIndex + word.length(), memo, target, words);
+            }
+        }
+        memo[startIndex] = ans;
+        return ans;
+    }
+
     public static void main(String[] args) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -201,5 +222,6 @@ public class DepthFirstSearch {
         System.out.println(generateParentheses(3));
         System.out.println(generalAllPermutations("abcd"));
         System.out.println(fibo(6, new int[20]));
+        System.out.println(wordBreak("algomonster", List.of("algo")));
     }
 }
