@@ -1,6 +1,7 @@
 package com.example.deepDive.algoMonster;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -193,7 +194,7 @@ public class DepthFirstSearch {
         if (startIndex == target.length()) {
             return true;
         }
-        if (memo[startIndex] != null){
+        if (memo[startIndex] != null) {
             return memo[startIndex];
         }
         boolean ans = false;
@@ -204,6 +205,34 @@ public class DepthFirstSearch {
         }
         memo[startIndex] = ans;
         return ans;
+    }
+
+    private static int minimumNumberofCoinstoMakeUpaGivenValueRecursion(List<Integer> coins, int amount, int sum, int[] memo) {
+        if (sum == amount) {
+            return 0;
+        }
+        if (sum > amount) {
+            return Integer.MAX_VALUE;
+        }
+        if (memo[sum] != -1) {
+            return memo[sum];
+        }
+        int ans = Integer.MAX_VALUE;
+        for (int coin : coins) {
+            int result = minimumNumberofCoinstoMakeUpaGivenValueRecursion(coins, amount, sum + coin, memo);
+            if (result == Integer.MAX_VALUE) {
+                continue;
+            }
+            ans = Math.min(ans, result + 1);
+        }
+        return memo[sum] = ans;
+    }
+
+    private static int minimumNumberofCoinstoMakeUpaGivenValue(List<Integer> coins, int amount) {
+        int[] memo = new int[amount + 1];
+        Arrays.fill(memo, -1);
+        int result = minimumNumberofCoinstoMakeUpaGivenValueRecursion(coins, amount, 0, memo);
+        return result == Integer.MAX_VALUE ? -1 : result;
     }
 
     public static void main(String[] args) {
@@ -223,5 +252,6 @@ public class DepthFirstSearch {
         System.out.println(generalAllPermutations("abcd"));
         System.out.println(fibo(6, new int[20]));
         System.out.println(wordBreak("algomonster", List.of("algo")));
+        System.out.println(minimumNumberofCoinstoMakeUpaGivenValue(List.of(1,5,2), 11));
     }
 }
