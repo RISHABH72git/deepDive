@@ -235,6 +235,33 @@ public class DepthFirstSearch {
         return result == Integer.MAX_VALUE ? -1 : result;
     }
 
+    private static List<List<Integer>> combinationSum(List<Integer> candidates, int target){
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> seq = new ArrayList<>();
+        combinationSumRecursion(candidates, target, res, seq, 0, 0);
+        return res;
+    }
+
+    private static void combinationSumRecursion(List<Integer> candidates, int target, List<List<Integer>> res, List<Integer> seq, int sum, int start) {
+        if (sum == target){
+            res.add(new ArrayList<>(seq));
+            return;
+        }
+        if (sum < target){
+            for (int i = start; i < candidates.size() ; i++) {
+                sum+=candidates.get(i);
+                if (sum > target){
+                    break;
+                }
+                seq.add(candidates.get(i));
+                combinationSumRecursion(candidates, target, res, seq, sum, i);
+                seq.remove(seq.size()-1);
+                sum -= candidates.get(i);
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -253,5 +280,6 @@ public class DepthFirstSearch {
         System.out.println(fibo(6, new int[20]));
         System.out.println(wordBreak("algomonster", List.of("algo")));
         System.out.println(minimumNumberofCoinstoMakeUpaGivenValue(List.of(1,5,2), 11));
+        System.out.println(combinationSum(List.of(2,3,5), 8));
     }
 }
