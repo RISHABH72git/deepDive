@@ -261,6 +261,21 @@ public class DepthFirstSearch {
         }
     }
 
+    public static List<List<Integer>> subsets(List<Integer> nums){
+        List<List<Integer>> res = new ArrayList<>();
+        subsetsRecursion(0, new ArrayList<>(), nums, res);
+        return res;
+    }
+
+    private static void subsetsRecursion(int i, ArrayList<Integer> cur, List<Integer> nums, List<List<Integer>> res) {
+        res.add(new ArrayList<>(cur));
+        for (int j = i; j < nums.size(); ++j) {
+            cur.add(nums.get(j));
+            subsetsRecursion(j+1, cur, nums, res);
+            cur.remove(cur.size()-1);
+        }
+    }
+
 
     public static void main(String[] args) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
@@ -281,5 +296,6 @@ public class DepthFirstSearch {
         System.out.println(wordBreak("algomonster", List.of("algo")));
         System.out.println(minimumNumberofCoinstoMakeUpaGivenValue(List.of(1,5,2), 11));
         System.out.println(combinationSum(List.of(2,3,5), 8));
+        System.out.println(subsets(List.of(1,2,3)));
     }
 }
