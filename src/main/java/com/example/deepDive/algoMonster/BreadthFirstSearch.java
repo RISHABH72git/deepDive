@@ -60,11 +60,35 @@ public class BreadthFirstSearch {
         return res;
     }
 
+    public static List<Integer> binaryTreeRightSideView(Node root){
+        List<Integer> res = new ArrayList<>();
+        ArrayDeque<Node> deque = new ArrayDeque<>();
+        deque.add(root);
+        while (deque.size() > 0){
+            int n = deque.size();
+            ArrayList<Integer> newLevel = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                Node node = deque.pop();
+                newLevel.add(node.val);
+                if (node.left != null){
+                    deque.add(node.left);
+                }
+                if (node.right != null){
+                    deque.add(node.right);
+                }
+            }
+            res.add(newLevel.get(newLevel.size()-1));
+        }
+        return res;
+    }
+
+
     public static void main(String[] args){
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
         Node node = new Node(5, left, right);
         System.out.println(binaryTreeLevelOrderTraversal(node));
         System.out.println(binaryTreeZigZagLevelOrderTraversal(node));
+        System.out.println(binaryTreeRightSideView(node));
     }
 }
