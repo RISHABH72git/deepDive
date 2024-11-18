@@ -82,6 +82,25 @@ public class BreadthFirstSearch {
         return res;
     }
 
+    public static int binaryTreeMinDepth(Node root){
+        ArrayDeque<Node> deque = new ArrayDeque<>();
+        deque.add(root);
+        int depth = -1;
+        while (deque.size() > 0){
+            depth++;
+            int n = deque.size();
+            for (int i = 0; i < n; i++) {
+                Node node = deque.pop();
+                if (node.left == null && node.right == null){
+                    return depth;
+                }
+                if (node.left != null) deque.add(node.left);
+                if (node.right != null) deque.add(node.right);
+            }
+        }
+        return depth;
+    }
+
 
     public static void main(String[] args){
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
@@ -90,5 +109,6 @@ public class BreadthFirstSearch {
         System.out.println(binaryTreeLevelOrderTraversal(node));
         System.out.println(binaryTreeZigZagLevelOrderTraversal(node));
         System.out.println(binaryTreeRightSideView(node));
+        System.out.println(binaryTreeMinDepth(node));
     }
 }
