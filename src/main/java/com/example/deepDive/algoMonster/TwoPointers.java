@@ -26,6 +26,19 @@ public class TwoPointers {
         return slow.val;
     }
 
+    public static List<Integer> moveZeros(List<Integer> nums){
+        int slow = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums.get(i) != 0){
+                int slowNum = nums.get(slow);
+                nums.set(slow, nums.get(i));
+                nums.set(i,slowNum);
+                slow++;
+            }
+        }
+        return nums;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -39,5 +52,7 @@ public class TwoPointers {
         System.out.println(removeDuplicates(list));
         LinkedListNode<Integer> linkedListNode = new LinkedListNode<Integer>(1);
         System.out.println(middleOfLinkedList(linkedListNode));
+        System.out.println(list);
+        System.out.println(moveZeros(list));
     }
 }
