@@ -39,6 +39,25 @@ public class TwoPointers {
         return nums;
     }
 
+    public static List<Integer> twoSumSorted(List<Integer> arr, int target){
+        int left = 0;
+        int right = arr.size() -1;
+        List<Integer> list = new ArrayList<>();
+        while (left<right){
+            int twoSum = arr.get(right) + arr.get(left);
+            if (twoSum == target){
+                list.add(left);
+                list.add(right);
+                break;
+            }else if (twoSum < target){
+                left++;
+            }else {
+                right--;
+            }
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -54,5 +73,6 @@ public class TwoPointers {
         System.out.println(middleOfLinkedList(linkedListNode));
         System.out.println(list);
         System.out.println(moveZeros(list));
+        System.out.println(twoSumSorted(List.of(2, 3, 4, 5, 8, 11, 18), 8));
     }
 }
