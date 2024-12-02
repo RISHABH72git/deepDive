@@ -16,46 +16,66 @@ public class TwoPointers {
         return pointer + 1;
     }
 
-    public static int middleOfLinkedList(LinkedListNode<Integer> head){
+    public static int middleOfLinkedList(LinkedListNode<Integer> head) {
         LinkedListNode<Integer> fast = head;
         LinkedListNode<Integer> slow = head;
-        while (fast != null && fast.next != null){
+        while (fast != null && fast.next != null) {
             fast = fast.next.next;
             slow = slow.next;
         }
         return slow.val;
     }
 
-    public static List<Integer> moveZeros(List<Integer> nums){
+    public static List<Integer> moveZeros(List<Integer> nums) {
         int slow = 0;
         for (int i = 0; i < nums.size(); i++) {
-            if (nums.get(i) != 0){
+            if (nums.get(i) != 0) {
                 int slowNum = nums.get(slow);
                 nums.set(slow, nums.get(i));
-                nums.set(i,slowNum);
+                nums.set(i, slowNum);
                 slow++;
             }
         }
         return nums;
     }
 
-    public static List<Integer> twoSumSorted(List<Integer> arr, int target){
+    public static List<Integer> twoSumSorted(List<Integer> arr, int target) {
         int left = 0;
-        int right = arr.size() -1;
+        int right = arr.size() - 1;
         List<Integer> list = new ArrayList<>();
-        while (left<right){
+        while (left < right) {
             int twoSum = arr.get(right) + arr.get(left);
-            if (twoSum == target){
+            if (twoSum == target) {
                 list.add(left);
                 list.add(right);
                 break;
-            }else if (twoSum < target){
+            } else if (twoSum < target) {
                 left++;
-            }else {
+            } else {
                 right--;
             }
         }
         return list;
+    }
+
+    public static boolean isPalindrome(String s) {
+        char[] arr = s.toCharArray();
+        int l = 0;
+        int r = arr.length - 1;
+        while (l < r) {
+            while (l < r && !Character.isLetterOrDigit(arr[l])) {
+                l++;
+            }
+            while (l < r && !Character.isLetterOrDigit(arr[r])) {
+                r--;
+            }
+            if (Character.toLowerCase(arr[l]) != Character.toLowerCase(arr[r])) {
+                return false;
+            }
+            l++;
+            r--;
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -74,5 +94,6 @@ public class TwoPointers {
         System.out.println(list);
         System.out.println(moveZeros(list));
         System.out.println(twoSumSorted(List.of(2, 3, 4, 5, 8, 11, 18), 8));
+        System.out.println(isPalindrome("civic"));
     }
 }
