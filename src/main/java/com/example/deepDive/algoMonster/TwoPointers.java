@@ -78,6 +78,22 @@ public class TwoPointers {
         return true;
     }
 
+    public static int containerWithMostWater(List<Integer> arr) {
+        int left = 0;
+        int right = arr.size() - 1;
+        int maxArea = 0;
+        while (left < right) {
+            int currentArea = Math.min(arr.get(left), arr.get(right)) * (right - left);
+            maxArea = Math.max(maxArea, currentArea);
+            if (arr.get(left) < arr.get(right)) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return maxArea;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -95,5 +111,6 @@ public class TwoPointers {
         System.out.println(moveZeros(list));
         System.out.println(twoSumSorted(List.of(2, 3, 4, 5, 8, 11, 18), 8));
         System.out.println(isPalindrome("civic"));
+        System.out.println(containerWithMostWater(List.of(1, 8, 6, 2, 5, 4, 8, 3, 7)));
     }
 }
