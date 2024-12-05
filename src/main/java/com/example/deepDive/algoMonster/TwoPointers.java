@@ -94,6 +94,21 @@ public class TwoPointers {
         return maxArea;
     }
 
+    public static int subarraySumFixed(List<Integer> nums, int k) {
+        int windowSum = 0;
+        for (int i = 0; i < k; i++) {
+            windowSum += nums.get(i);
+        }
+        int largest = windowSum;
+        for (int right = k; right < nums.size(); right++) {
+            int left = right - k;
+            windowSum -= nums.get(left);
+            windowSum += nums.get(right);
+            largest = Math.max(largest, windowSum);
+        }
+        return windowSum;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -112,5 +127,6 @@ public class TwoPointers {
         System.out.println(twoSumSorted(List.of(2, 3, 4, 5, 8, 11, 18), 8));
         System.out.println(isPalindrome("civic"));
         System.out.println(containerWithMostWater(List.of(1, 8, 6, 2, 5, 4, 8, 3, 7)));
+        System.out.println(subarraySumFixed(List.of(1, 8, 6, 2, 5, 4, 8, 3, 7), 3));
     }
 }
