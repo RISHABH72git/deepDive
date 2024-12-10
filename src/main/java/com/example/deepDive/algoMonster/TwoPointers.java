@@ -1,6 +1,7 @@
 package com.example.deepDive.algoMonster;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -109,6 +110,39 @@ public class TwoPointers {
         return windowSum;
     }
 
+    public static List<Integer> findAllAnagrams(String original, String check) {
+        int originalLen = original.length();
+        int checkLen = check.length();
+        ArrayList<Integer> res = new ArrayList<>();
+        if (originalLen < checkLen) return res;
+
+        // stores the frequency of each character in the check string
+        int[] checkCounter = new int[26];
+        // stores the frequency of each character in the current window
+        int[] window = new int[26];
+        for (int i = 0; i < checkLen; i++) {
+            checkCounter[check.charAt(i) - 'a']++;
+            window[original.charAt(i) - 'a']++;
+        }
+        if (Arrays.equals(window, checkCounter)) res.add(0);
+        for (int i = checkLen; i < originalLen; i++) {
+            System.out.println(Arrays.toString(window));
+            System.out.println(original.charAt(i - checkLen));
+            window[original.charAt(i - checkLen) - 'a']--;
+            System.out.println(Arrays.toString(window));
+            window[original.charAt(i) - 'a']++;
+            System.out.println(Arrays.toString(window));
+            if (Arrays.equals(window, checkCounter)) {
+                System.out.println("+++++++++++++++++++");
+                System.out.println(Arrays.toString(window));
+                System.out.println(Arrays.toString(checkCounter));
+                System.out.println("==========================");
+                res.add(i - checkLen + 1);
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -128,5 +162,7 @@ public class TwoPointers {
         System.out.println(isPalindrome("civic"));
         System.out.println(containerWithMostWater(List.of(1, 8, 6, 2, 5, 4, 8, 3, 7)));
         System.out.println(subarraySumFixed(List.of(1, 8, 6, 2, 5, 4, 8, 3, 7), 3));
+        System.out.println("-------------------");
+        System.out.println(findAllAnagrams("cbaebabacd", "abc"));
     }
 }
