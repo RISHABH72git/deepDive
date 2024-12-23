@@ -143,6 +143,21 @@ public class TwoPointers {
         return res;
     }
 
+    private static int subarraySumLongest(List<Integer> nums, Integer target) {
+        int windowSum = 0;
+        int length = 0;
+        int left = 0;
+        for (int right = 0; right < nums.size(); right++) {
+            windowSum += nums.get(right);
+            while (windowSum > target) {
+                windowSum -= nums.get(left);
+                ++left;
+            }
+            length = Math.max(length, right - left + 1);
+        }
+        return length;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -164,5 +179,6 @@ public class TwoPointers {
         System.out.println(subarraySumFixed(List.of(1, 8, 6, 2, 5, 4, 8, 3, 7), 3));
         System.out.println("-------------------");
         System.out.println(findAllAnagrams("cbaebabacd", "abc"));
+        System.out.println(subarraySumLongest(list, 7));
     }
 }
