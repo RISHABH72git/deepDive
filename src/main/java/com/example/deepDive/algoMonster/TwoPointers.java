@@ -1,9 +1,6 @@
 package com.example.deepDive.algoMonster;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class TwoPointers {
     public static int removeDuplicates(List<Integer> arr) {
@@ -158,6 +155,22 @@ public class TwoPointers {
         return length;
     }
 
+    private static int lengthOfLongestSubstring(String s) {
+        HashSet<Character> set = new HashSet<>();
+        int left = 0;
+        int maxLength = 0;
+        for (int right = 0; right < s.length(); right++) {
+            char currentChar = s.charAt(right);
+            while (set.contains(currentChar)) {
+                set.remove(s.charAt(left));
+                left++;
+            }
+            set.add(currentChar);
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+        return maxLength;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -180,5 +193,6 @@ public class TwoPointers {
         System.out.println("-------------------");
         System.out.println(findAllAnagrams("cbaebabacd", "abc"));
         System.out.println(subarraySumLongest(list, 7));
+        System.out.println(lengthOfLongestSubstring("abcabcbb"));
     }
 }
