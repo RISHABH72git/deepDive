@@ -171,6 +171,21 @@ public class TwoPointers {
         return maxLength;
     }
 
+    private static int minConsecutiveCards(int[] chars) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        int minlength = Integer.MAX_VALUE;
+        for (int right = 0; right < chars.length; right++) {
+            int key = chars[right];
+            if (hashMap.containsKey(key)) {
+                int left = hashMap.get(key);
+                minlength = Math.min(minlength, right - left + 1);
+            }
+            hashMap.put(key, right);
+        }
+        System.out.println(hashMap);
+        return minlength == Integer.MAX_VALUE ? -1 : minlength;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -194,5 +209,6 @@ public class TwoPointers {
         System.out.println(findAllAnagrams("cbaebabacd", "abc"));
         System.out.println(subarraySumLongest(list, 7));
         System.out.println(lengthOfLongestSubstring("abcabcbb"));
+        System.out.println(minConsecutiveCards(new int[]{3, 4, 2, 3, 4, 7}));
     }
 }
