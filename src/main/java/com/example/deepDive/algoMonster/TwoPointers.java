@@ -210,5 +210,28 @@ public class TwoPointers {
         System.out.println(subarraySumLongest(list, 7));
         System.out.println(lengthOfLongestSubstring("abcabcbb"));
         System.out.println(minConsecutiveCards(new int[]{3, 4, 2, 3, 4, 7}));
+        NumArray numArray = new NumArray(new int[]{3, 6, 9, 8, 4});
+        //sum in constant time
+        System.out.println(numArray.sumRange(1, 4));
+    }
+
+
+}
+
+class NumArray {
+    int[] prefixSum;
+
+    public NumArray(int[] nums) {
+        prefixSum = new int[nums.length + 1];
+        for (int i = 0; i < nums.length; i++) {
+            prefixSum[i + 1] = prefixSum[i] + nums[i];
+        }
+        System.out.println(Arrays.toString(prefixSum));
+    }
+
+    public int sumRange(int left, int right) {
+        System.out.println(prefixSum[right + 1]);
+        System.out.println(prefixSum[left]);
+        return prefixSum[right + 1] - prefixSum[left];
     }
 }
