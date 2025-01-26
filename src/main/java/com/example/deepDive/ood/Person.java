@@ -1,4 +1,6 @@
-package com.example.deepDive.ood.lms;
+package com.example.deepDive.ood;
+
+import com.example.deepDive.ood.Address;
 
 public class Person {
     private String name;

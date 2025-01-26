@@ -1,6 +1,8 @@
 package com.example.deepDive.ood.lms;
 
-public class Librarian extends Account{
+import com.example.deepDive.ood.Account;
+
+public class Librarian extends Account {
 
     public boolean addBookItem(BookItem bookItem) {
         return false;

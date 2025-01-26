@@ -1,4 +1,7 @@
-package com.example.deepDive.ood.lms;
+package com.example.deepDive.ood;
+
+import com.example.deepDive.ood.Person;
+import com.example.deepDive.ood.lms.AccountStatus;
 
 public abstract class Account {
     private String id;

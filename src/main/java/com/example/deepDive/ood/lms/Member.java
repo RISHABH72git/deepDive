@@ -1,5 +1,7 @@
 package com.example.deepDive.ood.lms;
 
+import com.example.deepDive.ood.Account;
+
 import java.util.Date;
 
 public class Member extends Account {

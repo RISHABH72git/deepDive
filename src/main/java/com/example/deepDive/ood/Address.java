@@ -1,4 +1,4 @@
-package com.example.deepDive.ood.lms;
+package com.example.deepDive.ood;
 
 public class Address {
     private String streetAddress;
