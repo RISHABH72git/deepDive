@@ -186,6 +186,24 @@ public class TwoPointers {
         return minlength == Integer.MAX_VALUE ? -1 : minlength;
     }
 
+    public static boolean linkedListCycle(LinkedListCycle<Integer> listNode) {
+        LinkedListCycle<Integer> tortoise = nextNode(listNode);
+        LinkedListCycle<Integer> hare = nextNode(nextNode(listNode));
+        while (tortoise != hare && hare.next != null) {
+            tortoise = nextNode(tortoise);
+            hare = nextNode(nextNode(hare));
+        }
+        return hare.next != null;
+    }
+
+    private static LinkedListCycle<Integer> nextNode(LinkedListCycle<Integer> listNode) {
+        System.out.println(listNode.val);
+        if (listNode.next == null) {
+            return listNode;
+        }
+        return listNode.next;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -213,6 +231,19 @@ public class TwoPointers {
         NumArray numArray = new NumArray(new int[]{3, 6, 9, 8, 4});
         //sum in constant time
         System.out.println(numArray.sumRange(1, 4));
+        System.out.println("+++++++++++++++++++++++++++");
+        List<Integer> integerArraysList = List.of(0, 1, 2, 3, 4);
+        ArrayList<LinkedListCycle<Integer>> nodesList = new ArrayList<>();
+        for (int i = 0; i < integerArraysList.size(); i++) {
+            nodesList.add(new LinkedListCycle<Integer>(i));
+        }
+        for (int i = 0; i < integerArraysList.size(); i++) {
+            if (integerArraysList.get(i) != -1) {
+                nodesList.get(i).next = nodesList.get(integerArraysList.get(i));
+            }
+        }
+        LinkedListCycle<Integer> nodes = nodesList.get(0);
+        System.out.println(linkedListCycle(nodes));
     }
 
 
@@ -233,5 +264,19 @@ class NumArray {
         System.out.println(prefixSum[right + 1]);
         System.out.println(prefixSum[left]);
         return prefixSum[right + 1] - prefixSum[left];
+    }
+}
+
+class LinkedListCycle<T> {
+    T val;
+    LinkedListCycle<T> next;
+
+    public LinkedListCycle(T val) {
+        this(val, null);
+    }
+
+    public LinkedListCycle(T val, LinkedListCycle<T> next) {
+        this.val = val;
+        this.next = next;
     }
 }
