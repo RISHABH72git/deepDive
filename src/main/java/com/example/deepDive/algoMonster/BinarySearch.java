@@ -15,6 +15,7 @@ public class BinarySearch {
         System.out.println(binarySearch.findMinimumInRotatedSortedArray(List.of(3, 5, 7, 11, 13, 17, 19, 2)));
         System.out.println(binarySearch.peakMountainArray(List.of(0, 10, 3, 2, 1, 0)));
         System.out.println(binarySearchRevesionOne(List.of(1, 3, 3, 5, 8, 9), 8));
+        System.out.println(binarySearchInArrays(new int[]{1, 2, 3, 4, 5, 6, 7}, 5));
     }
 
     private int vanillaBinarySearch(List<Integer> arr, int target) {
@@ -136,18 +137,33 @@ public class BinarySearch {
         return output;
     }
 
-    private static int binarySearchRevesionOne(List<Integer> list, int target){
+    private static int binarySearchRevesionOne(List<Integer> list, int target) {
         int left = 0;
-        int right = list.size() -1;
-        while (left <= right){
-            int mid = left + (right -left)/2;
-            if (list.get(mid) == target){
+        int right = list.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (list.get(mid) == target) {
                 return mid;
             }
-            if (list.get(mid) < target){
-                left = mid+1;
-            }else {
-                right = mid -1;
+            if (list.get(mid) < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    private static int binarySearchInArrays(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] == target) return mid;
+            if (arr[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
             }
         }
         return -1;
