@@ -15,7 +15,16 @@ public class BinarySearch {
         System.out.println(binarySearch.findMinimumInRotatedSortedArray(List.of(3, 5, 7, 11, 13, 17, 19, 2)));
         System.out.println(binarySearch.peakMountainArray(List.of(0, 10, 3, 2, 1, 0)));
         System.out.println(binarySearchRevesionOne(List.of(1, 3, 3, 5, 8, 9), 8));
+
+        long startTime1 = System.nanoTime();
+        System.out.println(binarySearchWithRecursion(new int[]{1, 2, 3, 4, 5, 6, 7}, 5));
+        long startTime2 = System.nanoTime();
+        System.out.println(startTime2 - startTime1);
+
+        long startTime4 = System.nanoTime();
         System.out.println(binarySearchInArrays(new int[]{1, 2, 3, 4, 5, 6, 7}, 5));
+        long startTime3 = System.nanoTime();
+        System.out.println(startTime3 - startTime4);
     }
 
     private int vanillaBinarySearch(List<Integer> arr, int target) {
@@ -167,5 +176,23 @@ public class BinarySearch {
             }
         }
         return -1;
+    }
+
+    private static int binarySearchWithRecursion(int[] arr, int target) {
+        return binarySearchWithRecursionHelper(arr, target, 0, arr.length - 1);
+    }
+
+    private static int binarySearchWithRecursionHelper(int[] arr, int target, int left, int right) {
+        if (left > right) {
+            return -1;
+        }
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == target) {
+            return target;
+        } else if (arr[mid] < target) {
+            return binarySearchWithRecursionHelper(arr, target, mid + 1, right);
+        } else {
+            return binarySearchWithRecursionHelper(arr, target, left, mid - 1);
+        }
     }
 }
