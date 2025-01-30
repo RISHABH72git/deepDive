@@ -3,6 +3,7 @@ package com.example.deepDive.algoMonster;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class DepthFirstSearch {
@@ -20,6 +21,27 @@ public class DepthFirstSearch {
             return left;
         }
         return dfs(root.right, target);
+    }
+
+    public static Node dfsLoop(Node root, int target) {
+        if (root == null) {
+            return null;
+        }
+        Stack<Node> nodeStack = new Stack<>();
+        nodeStack.push(root);
+        while (!nodeStack.isEmpty()) {
+            Node current = nodeStack.pop();
+            if (current.val == target) {
+                return current;
+            }
+            if (current.left != null) {
+                nodeStack.push(current.left);
+            }
+            if (current.right != null) {
+                nodeStack.push(current.right);
+            }
+        }
+        return null;
     }
 
     public static int treeMaxDepth(Node root) {
@@ -235,7 +257,7 @@ public class DepthFirstSearch {
         return result == Integer.MAX_VALUE ? -1 : result;
     }
 
-    private static List<List<Integer>> combinationSum(List<Integer> candidates, int target){
+    private static List<List<Integer>> combinationSum(List<Integer> candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> seq = new ArrayList<>();
         combinationSumRecursion(candidates, target, res, seq, 0, 0);
@@ -243,25 +265,25 @@ public class DepthFirstSearch {
     }
 
     private static void combinationSumRecursion(List<Integer> candidates, int target, List<List<Integer>> res, List<Integer> seq, int sum, int start) {
-        if (sum == target){
+        if (sum == target) {
             res.add(new ArrayList<>(seq));
             return;
         }
-        if (sum < target){
-            for (int i = start; i < candidates.size() ; i++) {
-                sum+=candidates.get(i);
-                if (sum > target){
+        if (sum < target) {
+            for (int i = start; i < candidates.size(); i++) {
+                sum += candidates.get(i);
+                if (sum > target) {
                     break;
                 }
                 seq.add(candidates.get(i));
                 combinationSumRecursion(candidates, target, res, seq, sum, i);
-                seq.remove(seq.size()-1);
+                seq.remove(seq.size() - 1);
                 sum -= candidates.get(i);
             }
         }
     }
 
-    public static List<List<Integer>> subsets(List<Integer> nums){
+    public static List<List<Integer>> subsets(List<Integer> nums) {
         List<List<Integer>> res = new ArrayList<>();
         subsetsRecursion(0, new ArrayList<>(), nums, res);
         return res;
@@ -271,8 +293,8 @@ public class DepthFirstSearch {
         res.add(new ArrayList<>(cur));
         for (int j = i; j < nums.size(); ++j) {
             cur.add(nums.get(j));
-            subsetsRecursion(j+1, cur, nums, res);
-            cur.remove(cur.size()-1);
+            subsetsRecursion(j + 1, cur, nums, res);
+            cur.remove(cur.size() - 1);
         }
     }
 
@@ -281,7 +303,8 @@ public class DepthFirstSearch {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
         Node node = new Node(5, left, right);
-        System.out.println(dfs(node, 9));
+        System.out.println(dfs(node, 8));
+        System.out.println(dfsLoop(node, 8));
         System.out.println(treeMaxDepth(node));
         System.out.println(visibleTreeNodes(node, Integer.MIN_VALUE));
         System.out.println(balanceBinaryTree(node) != -1);
@@ -294,8 +317,8 @@ public class DepthFirstSearch {
         System.out.println(generalAllPermutations("abcd"));
         System.out.println(fibo(6, new int[20]));
         System.out.println(wordBreak("algomonster", List.of("algo")));
-        System.out.println(minimumNumberofCoinstoMakeUpaGivenValue(List.of(1,5,2), 11));
-        System.out.println(combinationSum(List.of(2,3,5), 8));
-        System.out.println(subsets(List.of(1,2,3)));
+        System.out.println(minimumNumberofCoinstoMakeUpaGivenValue(List.of(1, 5, 2), 11));
+        System.out.println(combinationSum(List.of(2, 3, 5), 8));
+        System.out.println(subsets(List.of(1, 2, 3)));
     }
 }
