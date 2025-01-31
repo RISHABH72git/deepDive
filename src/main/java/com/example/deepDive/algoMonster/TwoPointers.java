@@ -204,6 +204,28 @@ public class TwoPointers {
         return listNode.next;
     }
 
+    private static boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
+        Arrays.sort(sArr);
+        Arrays.sort(tArr);
+        System.out.println(sArr);
+        System.out.println(tArr);
+        int left = 0;
+        int right = 0;
+        while (left < sArr.length) {
+            if (tArr[left] != sArr[right]) {
+                return false;
+            }
+            left++;
+            right++;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -244,6 +266,7 @@ public class TwoPointers {
         }
         LinkedListCycle<Integer> nodes = nodesList.get(0);
         System.out.println(linkedListCycle(nodes));
+        System.out.println(isAnagram("rac", "car"));
     }
 
 
