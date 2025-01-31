@@ -226,6 +226,22 @@ public class TwoPointers {
         return true;
     }
 
+    private static boolean isAnagramWithoutSort(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        int[] count = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            count[s.charAt(i) - 'a']++;
+            count[t.charAt(i) - 'a']--;
+        }
+
+        for (int c : count) {
+            if (c != 0) return false;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -266,7 +282,8 @@ public class TwoPointers {
         }
         LinkedListCycle<Integer> nodes = nodesList.get(0);
         System.out.println(linkedListCycle(nodes));
-        System.out.println(isAnagram("rac", "car"));
+        System.out.println(isAnagram("rat", "car"));
+        System.out.println(isAnagramWithoutSort("rat", "car"));
     }
 
 
