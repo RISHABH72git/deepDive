@@ -242,6 +242,25 @@ public class TwoPointers {
         return true;
     }
 
+    private static List<Integer> findAllAnagramInString(String original, String check) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (original.length() < check.length()) return res;
+        int[] checkCounter = new int[26];
+        int[] window = new int[26];
+        for (int i = 0; i < check.length(); i++) {
+            checkCounter[check.charAt(i) - 'a']++;
+            window[original.charAt(i) - 'a']++;
+        }
+        if (Arrays.equals(checkCounter, window)) res.add(0);
+
+        for (int i = check.length(); i < original.length(); i++) {
+            window[original.charAt(i - check.length()) - 'a']--;
+            window[original.charAt(i) - 'a']++;
+            if (Arrays.equals(window, checkCounter)) res.add(i - check.length() + 1);
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -284,6 +303,7 @@ public class TwoPointers {
         System.out.println(linkedListCycle(nodes));
         System.out.println(isAnagram("rat", "car"));
         System.out.println(isAnagramWithoutSort("rat", "car"));
+        System.out.println(findAllAnagramInString("cbaebabacd", "abc"));
     }
 
 
