@@ -10,7 +10,7 @@ public class Question {
     public static void main(String[] arg) {
         Question question = new Question();
         question.stackCreation();
-        System.out.println(BestTimetoBuyandSellStock(new int[]{7, 6, 4, 3, 1}));
+        System.out.println(BestTimetoBuyandSellStock(new int[]{7, 1, 1, 0, 0, 6, 0}));
     }
 
     public void stackCreation() {
@@ -19,17 +19,17 @@ public class Question {
     }
 
     public static int BestTimetoBuyandSellStock(int[] arr) {
-        int min = Integer.MIN_VALUE;
-        int left = 0;
+        int min = arr[0];
+        int maxProfit = 0;
         for (int i = 1; i < arr.length; i++) {
-            int res = arr[i] - arr[left];
-            if (res < 0) {
-                left++;
+            int profit = arr[i] - min;
+            if (profit > maxProfit) {
+                maxProfit = profit;
             }
-            if (res > min) {
-                min = res;
+            if (arr[i] < min) {
+                min = arr[i];
             }
         }
-        return Math.max(min, 0);
+        return maxProfit;
     }
 }
