@@ -261,6 +261,20 @@ public class TwoPointers {
         return res;
     }
 
+    private static boolean ransomNoteCanConstruct(String ransomNote, String magazine) {
+        int[] letterCount = new int[26];
+        for (char c : magazine.toCharArray()) {
+            letterCount[c - 'a']++;
+        }
+        for (char c : ransomNote.toCharArray()) {
+            if (letterCount[c - 'a'] == 0) {
+                return false;
+            }
+            letterCount[c - 'a']--;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(0);
@@ -304,6 +318,9 @@ public class TwoPointers {
         System.out.println(isAnagram("rat", "car"));
         System.out.println(isAnagramWithoutSort("rat", "car"));
         System.out.println(findAllAnagramInString("cbaebabacd", "abc"));
+        String ransomNote = "aa";
+        String magazine = "aab";
+        System.out.println(ransomNoteCanConstruct(ransomNote, magazine));
     }
 
 
