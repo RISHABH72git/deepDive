@@ -1,5 +1,6 @@
 package com.example.deepDive.randomsQuestion;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
@@ -14,7 +15,8 @@ public class Question {
         question.stackCreation();
         System.out.println(BestTimetoBuyandSellStock(new int[]{7, 1, 1, 0, 0, 6, 0}));
         System.out.println("-------------------------------------------------------");
-        containsDuplicate(new int[]{7, 1, 1, 2, 3, 6, 0});
+        System.out.println(containsDuplicate(new int[]{7, 1, 1, 2, 3, 6, 0}));
+        System.out.println(containsDuplicateBySort(new int[]{7, 1, 1, 2, 3, 6, 0}));
     }
 
     public void stackCreation() {
@@ -41,6 +43,16 @@ public class Question {
         Set<Integer> integers = new HashSet<>();
         for (int i = 0; i < arr.length; i++) {
             if (!integers.add(arr[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean containsDuplicateBySort(int[] arr) {
+        Arrays.sort(arr);
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] == arr[i + 1]) {
                 return true;
             }
         }
