@@ -26,6 +26,13 @@ public class BinaryTree {
         }
     }
 
+    public static int sumBinaryTreeValue(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return sumBinaryTreeValue(node.left) + node.val + sumBinaryTreeValue(node.right);
+    }
+
     public static void main(String[] arg) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -36,5 +43,7 @@ public class BinaryTree {
         binaryTree.preOrderTraversal(node);
         System.out.println("---------------------------------------");
         binaryTree.postOrderTraversal(node);
+        System.out.println("---------------------------------------");
+        System.out.println(sumBinaryTreeValue(node));
     }
 }
