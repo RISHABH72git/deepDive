@@ -19,6 +19,10 @@ public class Question {
         System.out.println(containsDuplicateBySort(new int[]{7, 1, 1, 2, 3, 6, 0}));
         System.out.println("---------------------------------------");
         System.out.println(factorialRecursion(5));
+        System.out.println("---------------------------------------");
+        permutationString("hello", "");
+        System.out.println("---------------------------------------");
+        System.out.println(NthFibonacciNumber(9));
     }
 
     public void stackCreation() {
@@ -68,6 +72,27 @@ public class Question {
             return 1;
         } else {
             return n * factorialRecursion(n - 1);
+        }
+    }
+
+    public static void permutationString(String str, String prefix) {
+        if (str.length() == 0) {
+            System.out.println(prefix);
+        } else {
+            for (int i = 0; i < str.length(); i++) {
+                String rem = str.substring(0, i) + str.substring(i + 1);
+                permutationString(rem, prefix + str.charAt(i));
+            }
+        }
+    }
+
+    public static int NthFibonacciNumber(int n) {
+        if (n <= 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        } else {
+            return NthFibonacciNumber(n - 1) + NthFibonacciNumber(n - 2);
         }
     }
 
