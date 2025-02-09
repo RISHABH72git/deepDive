@@ -17,6 +17,8 @@ public class Question {
         System.out.println("-------------------------------------------------------");
         System.out.println(containsDuplicate(new int[]{7, 1, 1, 2, 3, 6, 0}));
         System.out.println(containsDuplicateBySort(new int[]{7, 1, 1, 2, 3, 6, 0}));
+        System.out.println("---------------------------------------");
+        System.out.println(factorialRecursion(5));
     }
 
     public void stackCreation() {
@@ -58,4 +60,15 @@ public class Question {
         }
         return false;
     }
+
+    public static int factorialRecursion(int n) {
+        if (n < 0) {
+            return -1;
+        } else if (n == 0) {
+            return 1;
+        } else {
+            return n * factorialRecursion(n - 1);
+        }
+    }
+
 }
