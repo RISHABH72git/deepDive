@@ -1,5 +1,7 @@
 package com.example.deepDive.algoMonster;
 
+import java.util.Stack;
+
 public class BinaryTree {
 
     public void preOrderTraversal(Node root) {
@@ -33,6 +35,26 @@ public class BinaryTree {
         return sumBinaryTreeValue(node.left) + node.val + sumBinaryTreeValue(node.right);
     }
 
+    public static int sumBinaryTreeByStack(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        Stack<Node> stack = new Stack<>();
+        stack.push(node);
+        int sum = 0;
+        while (!stack.isEmpty()) {
+            Node current = stack.pop();
+            sum += current.val;
+            if (current.left != null) {
+                stack.push(current.left);
+            }
+            if (current.right != null) {
+                stack.push(current.right);
+            }
+        }
+        return sum;
+    }
+
     public static void main(String[] arg) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -45,5 +67,7 @@ public class BinaryTree {
         binaryTree.postOrderTraversal(node);
         System.out.println("---------------------------------------");
         System.out.println(sumBinaryTreeValue(node));
+        System.out.println("---------------------------------------");
+        System.out.println(sumBinaryTreeByStack(node));
     }
 }
