@@ -41,9 +41,30 @@ public class ArraysAndStrings {
         return true;
     }
 
+    public static boolean checkPermutationGivenTwoStringsWithoutSort(String str1, String str2) {
+        char[] char1 = str1.toCharArray();
+        char[] char2 = str2.toCharArray();
+        if (char1.length != char2.length) {
+            return false;
+        }
+        int[] count = new int[26];
+        for (int i = 0; i < char1.length; i++) {
+            count[char1[i] - 'a']++;
+            count[char2[i] - 'a']--;
+        }
+
+        for (int num : count) {
+            if (num != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println(stringHasAllUniqueCharacters("helo"));
         System.out.println(stringHasAllUniqueCharactersWithoutAnyDataStructure("helo"));
-        System.out.println(checkPermutationGivenTwoStrings("abc", "abcd"));
+        System.out.println(checkPermutationGivenTwoStrings("abc", "abc"));
+        System.out.println(checkPermutationGivenTwoStringsWithoutSort("abcd", "dabc"));
     }
 }
