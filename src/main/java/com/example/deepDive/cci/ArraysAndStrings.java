@@ -61,10 +61,27 @@ public class ArraysAndStrings {
         return true;
     }
 
+    public static String urlifyTheString(String raw) {
+        StringBuilder newCharString = new StringBuilder();
+        int pointer = 0;
+        for (int i = 0; i < raw.toCharArray().length; i++) {
+            if (!String.valueOf(raw.charAt(i)).equals(" ")) {
+                pointer = i;
+                newCharString.append(raw.charAt(i));
+            } else {
+                if (pointer + 1 == i) {
+                    newCharString.append("%20");
+                }
+            }
+        }
+        return newCharString.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println(stringHasAllUniqueCharacters("helo"));
         System.out.println(stringHasAllUniqueCharactersWithoutAnyDataStructure("helo"));
         System.out.println(checkPermutationGivenTwoStrings("abc", "abc"));
         System.out.println(checkPermutationGivenTwoStringsWithoutSort("abcd", "dabc"));
+        System.out.println(urlifyTheString(" my name si h h  rish"));
     }
 }
