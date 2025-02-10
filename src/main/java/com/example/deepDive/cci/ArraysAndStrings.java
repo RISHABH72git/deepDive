@@ -1,5 +1,6 @@
 package com.example.deepDive.cci;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,8 +25,25 @@ public class ArraysAndStrings {
         return true;
     }
 
+    public static boolean checkPermutationGivenTwoStrings(String str1, String str2) {
+        char[] char1 = str1.toCharArray();
+        char[] char2 = str2.toCharArray();
+        if (char1.length != char2.length) {
+            return false;
+        }
+        Arrays.sort(char1);
+        Arrays.sort(char2);
+        for (int i = 0; i < char1.length; i++) {
+            if (char1[i] != char2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println(stringHasAllUniqueCharacters("helo"));
         System.out.println(stringHasAllUniqueCharactersWithoutAnyDataStructure("helo"));
+        System.out.println(checkPermutationGivenTwoStrings("abc", "abcd"));
     }
 }
