@@ -69,7 +69,7 @@ public class ArraysAndStrings {
                 pointer = i;
                 newCharString.append(raw.charAt(i));
             } else {
-                if (pointer + 1 == i) {
+                if (pointer + 1 == i || pointer == 0) {
                     newCharString.append("%20");
                 }
             }
@@ -82,6 +82,6 @@ public class ArraysAndStrings {
         System.out.println(stringHasAllUniqueCharactersWithoutAnyDataStructure("helo"));
         System.out.println(checkPermutationGivenTwoStrings("abc", "abc"));
         System.out.println(checkPermutationGivenTwoStringsWithoutSort("abcd", "dabc"));
-        System.out.println(urlifyTheString(" my name si h h  rish"));
+        System.out.println(urlifyTheString("my name si h h  rish"));
     }
 }
