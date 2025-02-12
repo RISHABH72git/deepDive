@@ -1,6 +1,7 @@
 package com.example.deepDive.cci;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -77,11 +78,32 @@ public class ArraysAndStrings {
         return newCharString.toString();
     }
 
+    public static boolean oneAway(String str1, String str2) {
+        char[] char1 = str1.toCharArray();
+        char[] char2 = str2.toCharArray();
+        if (char1.length == char2.length) {
+            Arrays.sort(char1);
+            Arrays.sort(char2);
+            int pointer = 0;
+            for (int i = 0; i < char1.length; i++) {
+                if (char1[i] != char2[i]) {
+                    pointer++;
+                }
+            }
+            return pointer == 1;
+        } else if (char1.length > char2.length) {
+            return (char1.length - char2.length) == 1;
+        } else {
+            return (char2.length - char1.length) == 1;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(stringHasAllUniqueCharacters("helo"));
         System.out.println(stringHasAllUniqueCharactersWithoutAnyDataStructure("helo"));
         System.out.println(checkPermutationGivenTwoStrings("abc", "abc"));
         System.out.println(checkPermutationGivenTwoStringsWithoutSort("abcd", "dabc"));
         System.out.println(urlifyTheString("my name si h h  rish"));
+        System.out.println(oneAway("palle", "palle"));
     }
 }
