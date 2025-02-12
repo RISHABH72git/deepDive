@@ -79,23 +79,48 @@ public class ArraysAndStrings {
     }
 
     public static boolean oneAway(String str1, String str2) {
-        char[] char1 = str1.toCharArray();
-        char[] char2 = str2.toCharArray();
-        if (char1.length == char2.length) {
-            Arrays.sort(char1);
-            Arrays.sort(char2);
-            int pointer = 0;
-            for (int i = 0; i < char1.length; i++) {
-                if (char1[i] != char2[i]) {
-                    pointer++;
+        int char1 = str1.length();
+        int char2 = str2.length();
+        if (Math.abs(char1 - char2) > 1) {
+            return false;
+        }
+        if (char1 == char2) {
+            boolean foundDifference = false;
+            for (int i = 0; i < str1.length(); i++) {
+                if (str1.charAt(i) != str2.charAt(i)) {
+                    if (foundDifference) {
+                        return false;
+                    }
+                    foundDifference = true;
                 }
             }
-            return pointer == 1;
-        } else if (char1.length > char2.length) {
-            return (char1.length - char2.length) == 1;
-        } else {
-            return (char2.length - char1.length) == 1;
+            return true;
         }
+
+        if (char1 > char2) {
+            return oneInsertEdit(str2, str1);
+        } else {
+            return oneInsertEdit(str1, str2);
+        }
+    }
+
+    public static boolean oneInsertEdit(String shorter, String longer) {
+        int index1 = 0, index2 = 0;
+        boolean foundDifference = false;
+
+        while (index1 < shorter.length() && index2 < longer.length()) {
+            if (shorter.charAt(index1) != longer.charAt(index2)) {
+                if (foundDifference) {
+                    return false;
+                }
+                foundDifference = true;
+                index2++;
+            } else {
+                index1++;
+                index2++;
+            }
+        }
+        return foundDifference;
     }
 
     public static void main(String[] args) {
@@ -104,6 +129,9 @@ public class ArraysAndStrings {
         System.out.println(checkPermutationGivenTwoStrings("abc", "abc"));
         System.out.println(checkPermutationGivenTwoStringsWithoutSort("abcd", "dabc"));
         System.out.println(urlifyTheString("my name si h h  rish"));
-        System.out.println(oneAway("palle", "palle"));
+        System.out.println(oneAway("pale", "ple"));  // true (remove 'a')
+        System.out.println(oneAway("pales", "pale")); // true (remove 's')
+        System.out.println(oneAway("pale", "bale"));  // true (replace 'p' with 'b')
+        System.out.println(oneAway("pale", "bake"));
     }
 }
