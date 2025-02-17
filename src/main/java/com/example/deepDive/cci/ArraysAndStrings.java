@@ -123,6 +123,23 @@ public class ArraysAndStrings {
         return foundDifference;
     }
 
+    public static String basicStringCompression(String str) {
+        StringBuilder sb = new StringBuilder();
+        int lastPointer = 0;
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(lastPointer) == str.charAt(i)) {
+                count++;
+            } else {
+                sb.append(str.charAt(i - 1));
+                sb.append(count);
+                count = 1;
+                lastPointer = i;
+            }
+        }
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println(stringHasAllUniqueCharacters("helo"));
         System.out.println(stringHasAllUniqueCharactersWithoutAnyDataStructure("helo"));
@@ -133,5 +150,6 @@ public class ArraysAndStrings {
         System.out.println(oneAway("pales", "pale")); // true (remove 's')
         System.out.println(oneAway("pale", "bale"));  // true (replace 'p' with 'b')
         System.out.println(oneAway("pale", "bake"));
+        System.out.println(basicStringCompression("aaabbbcdeeeeeaaaa"));
     }
 }
