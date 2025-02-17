@@ -137,6 +137,7 @@ public class ArraysAndStrings {
                 lastPointer = i;
             }
         }
+        sb.append(str.charAt(str.length() - 1)).append(count);
         return sb.toString();
     }
 
@@ -150,6 +151,6 @@ public class ArraysAndStrings {
         System.out.println(oneAway("pales", "pale")); // true (remove 's')
         System.out.println(oneAway("pale", "bale"));  // true (replace 'p' with 'b')
         System.out.println(oneAway("pale", "bake"));
-        System.out.println(basicStringCompression("aaabbbcdeeeeeaaaa"));
+        System.out.println(basicStringCompression("aaaaabbbcccddde"));
     }
 }
