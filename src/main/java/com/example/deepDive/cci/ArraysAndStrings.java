@@ -160,6 +160,34 @@ public class ArraysAndStrings {
         return matrix;
     }
 
+    public static int[][] zerosMatrix(int[][] matrix) {
+        boolean[] row = new boolean[matrix.length];
+        boolean[] column = new boolean[matrix[0].length];
+        for (int i = 0; i < row.length; i++) {
+            for (int j = 0; j < column.length; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = true;
+                    column[j] = true;
+                }
+            }
+        }
+        for (int i = 0; i < row.length; i++) {
+            if (row[i]) {
+                for (int j = 0; j < column.length; j++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        for (int i = 0; i < column.length; i++) {
+            if (column[i]) {
+                for (int j = 0; j < row.length; j++) {
+                    matrix[j][i] = 0;
+                }
+            }
+        }
+        return matrix;
+    }
+
     public static void main(String[] args) {
         System.out.println(stringHasAllUniqueCharacters("helo"));
         System.out.println(stringHasAllUniqueCharactersWithoutAnyDataStructure("helo"));
@@ -173,5 +201,7 @@ public class ArraysAndStrings {
         System.out.println(basicStringCompression("aaaaabbbcccddde"));
         int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         System.out.println(Arrays.deepToString(rotateMatrix(matrix)));
+        int[][] setZerosMatrix = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
+        System.out.println(Arrays.deepToString(zerosMatrix(setZerosMatrix)));
     }
 }
