@@ -141,6 +141,25 @@ public class ArraysAndStrings {
         return sb.toString();
     }
 
+    public static int[][] rotateMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix[0].length; i++) {
+            for (int j = i; j < matrix.length; j++) {
+                System.out.println(i + "" + j + "==" + matrix[i][j]);
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length / 2; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][matrix.length - 1 - j];
+                matrix[i][matrix.length - 1 - j] = temp;
+            }
+        }
+        return matrix;
+    }
+
     public static void main(String[] args) {
         System.out.println(stringHasAllUniqueCharacters("helo"));
         System.out.println(stringHasAllUniqueCharactersWithoutAnyDataStructure("helo"));
@@ -152,5 +171,7 @@ public class ArraysAndStrings {
         System.out.println(oneAway("pale", "bale"));  // true (replace 'p' with 'b')
         System.out.println(oneAway("pale", "bake"));
         System.out.println(basicStringCompression("aaaaabbbcccddde"));
+        int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        System.out.println(Arrays.deepToString(rotateMatrix(matrix)));
     }
 }
