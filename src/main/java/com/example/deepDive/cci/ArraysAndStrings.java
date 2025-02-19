@@ -188,6 +188,24 @@ public class ArraysAndStrings {
         return matrix;
     }
 
+    public static boolean stringRotations(String mainString, String rotateString) {
+        int left = 0;
+        int right = 0;
+        boolean counter = true;
+        while (left < mainString.length() && right < rotateString.length()) {
+            if (mainString.charAt(left) == rotateString.charAt(right)) {
+                left++;
+            } else {
+                counter = false;
+            }
+            right++;
+            if (mainString.length() <= right) {
+                right = 0;
+            }
+        }
+        return counter;
+    }
+
     public static void main(String[] args) {
         System.out.println(stringHasAllUniqueCharacters("helo"));
         System.out.println(stringHasAllUniqueCharactersWithoutAnyDataStructure("helo"));
@@ -203,5 +221,6 @@ public class ArraysAndStrings {
         System.out.println(Arrays.deepToString(rotateMatrix(matrix)));
         int[][] setZerosMatrix = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
         System.out.println(Arrays.deepToString(zerosMatrix(setZerosMatrix)));
+        System.out.println(stringRotations("waterbottle", "erbottlewat"));
     }
 }
