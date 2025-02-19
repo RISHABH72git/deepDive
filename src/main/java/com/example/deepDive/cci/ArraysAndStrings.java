@@ -191,12 +191,15 @@ public class ArraysAndStrings {
     public static boolean stringRotations(String mainString, String rotateString) {
         int left = 0;
         int right = 0;
-        boolean counter = true;
+        boolean counter = false;
         while (left < mainString.length() && right < rotateString.length()) {
             if (mainString.charAt(left) == rotateString.charAt(right)) {
                 left++;
+                counter = true;
             } else {
-                counter = false;
+                if (counter) {
+                    return false;
+                }
             }
             right++;
             if (mainString.length() <= right) {
@@ -204,6 +207,11 @@ public class ArraysAndStrings {
             }
         }
         return counter;
+    }
+
+    public static boolean stringRotationDoubleString(String mainString, String rotateString) {
+        String doubleString = mainString + mainString;
+        return doubleString.contains(rotateString);
     }
 
     public static void main(String[] args) {
@@ -221,6 +229,7 @@ public class ArraysAndStrings {
         System.out.println(Arrays.deepToString(rotateMatrix(matrix)));
         int[][] setZerosMatrix = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
         System.out.println(Arrays.deepToString(zerosMatrix(setZerosMatrix)));
-        System.out.println(stringRotations("waterbottle", "erbottlewat"));
+        System.out.println(stringRotations("abcde", "abced"));
+        System.out.println(stringRotationDoubleString("waterbottle", "erbottlewat"));
     }
 }
