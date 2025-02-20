@@ -1,5 +1,7 @@
 package com.example.deepDive.cci;
 
+import java.util.List;
+
 public class LinkedListCCI {
     LinkedListCCI next;
     int val;
@@ -36,5 +38,24 @@ public class LinkedListCCI {
         LinkedListCCI newHead = new LinkedListCCI(data);
         newHead.next = this;
         return newHead;
+    }
+
+    private LinkedListCCI createLinkedList(List<Integer> integerList) {
+        LinkedListCCI head = this;
+        for (int i = 0; i < integerList.size(); i++) {
+            head.next = new LinkedListCCI(integerList.get(i));
+            head = head.next;
+        }
+        return head;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list = List.of(1, 3, 4, 6, 7, 8, 9);
+        LinkedListCCI linkedListCCI = new LinkedListCCI(5);
+        LinkedListCCI head = linkedListCCI.createLinkedList(list);
+        while (head.next != null){
+            System.out.println(head.val);
+            head = head.next;
+        }
     }
 }
