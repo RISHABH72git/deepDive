@@ -52,10 +52,10 @@ public class LinkedListCCI {
     public static void main(String[] args) {
         List<Integer> list = List.of(1, 3, 4, 6, 7, 8, 9);
         LinkedListCCI linkedListCCI = new LinkedListCCI(5);
-        LinkedListCCI head = linkedListCCI.createLinkedList(list);
-        while (head.next != null){
-            System.out.println(head.val);
-            head = head.next;
+        linkedListCCI.createLinkedList(list);
+        while (linkedListCCI.next != null) {
+            System.out.println(linkedListCCI.val);
+            linkedListCCI = linkedListCCI.next;
         }
     }
 }
