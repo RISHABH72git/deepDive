@@ -1,6 +1,8 @@
 package com.example.deepDive.cci;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LinkedListCCI {
     LinkedListCCI next;
@@ -49,13 +51,28 @@ public class LinkedListCCI {
         return head;
     }
 
+    public void removeDuplicatesBySets() {
+        LinkedListCCI node = this;
+        Set<Integer> integerSet = new HashSet<>();
+        integerSet.add(node.val);
+        while (node.next != null) {
+            System.out.println(node.val);
+            if (!integerSet.add(node.val)) {
+                node = node.next.next;
+            } else {
+                node = node.next;
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        List<Integer> list = List.of(1, 3, 4, 6, 7, 8, 9);
+        List<Integer> list = List.of(1, 3, 4, 6, 6, 7, 8, 9);
         LinkedListCCI linkedListCCI = new LinkedListCCI(5);
         linkedListCCI.createLinkedList(list);
-        while (linkedListCCI.next != null) {
-            System.out.println(linkedListCCI.val);
-            linkedListCCI = linkedListCCI.next;
-        }
+        linkedListCCI.removeDuplicatesBySets();
+//        while (linkedListCCI.next != null) {
+//            System.out.println(linkedListCCI.val);
+//            linkedListCCI = linkedListCCI.next;
+//        }
     }
 }
