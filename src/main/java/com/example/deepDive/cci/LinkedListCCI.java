@@ -27,6 +27,7 @@ public class LinkedListCCI {
             return head.next;
         }
         while (head.next != null) {
+            System.out.println(head.val);
             if (head.next.val == data) {
                 head.next = head.next.next;
                 return head;
@@ -53,15 +54,24 @@ public class LinkedListCCI {
 
     public void removeDuplicatesBySets() {
         LinkedListCCI node = this;
-        Set<Integer> integerSet = new HashSet<>();
-        integerSet.add(node.val);
+        Set<Integer> seenValues = new HashSet<>();
+        seenValues.add(node.val);
+
         while (node.next != null) {
-            System.out.println(node.val);
-            if (!integerSet.add(node.val)) {
-                node = node.next.next;
+            if (seenValues.contains(node.next.val)) {
+                node.next = node.next.next;
             } else {
+                seenValues.add(node.next.val);
                 node = node.next;
             }
+        }
+    }
+
+    public void printAllLinkedListItem() {
+        LinkedListCCI current = this;
+        while (current != null) {
+            System.out.println(current.val);
+            current = current.next;
         }
     }
 
@@ -70,9 +80,6 @@ public class LinkedListCCI {
         LinkedListCCI linkedListCCI = new LinkedListCCI(5);
         linkedListCCI.createLinkedList(list);
         linkedListCCI.removeDuplicatesBySets();
-//        while (linkedListCCI.next != null) {
-//            System.out.println(linkedListCCI.val);
-//            linkedListCCI = linkedListCCI.next;
-//        }
+        linkedListCCI.printAllLinkedListItem();
     }
 }
