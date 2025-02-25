@@ -1,5 +1,6 @@
 package com.example.deepDive.cci;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -82,6 +83,16 @@ public class LinkedListCCI {
         }
     }
 
+    public LinkedListCCI returnKthToLast(int k) {
+        LinkedListCCI current = this;
+        List<LinkedListCCI> list = new ArrayList<>();
+        while (current != null) {
+            list.add(current);
+            current = current.next;
+        }
+        return list.get(list.size() - k);
+    }
+
     public void printAllLinkedListItem() {
         LinkedListCCI current = this;
         while (current != null) {
@@ -95,6 +106,9 @@ public class LinkedListCCI {
         LinkedListCCI linkedListCCI = new LinkedListCCI(5);
         linkedListCCI.createLinkedList(list);
         linkedListCCI.removeDuplicateWithoutBuffer();
-//        linkedListCCI.printAllLinkedListItem();
+        linkedListCCI.printAllLinkedListItem();
+        System.out.println("-------------------");
+        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
+        System.out.println(kthElement.val);
     }
 }
