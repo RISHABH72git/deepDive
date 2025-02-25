@@ -67,6 +67,21 @@ public class LinkedListCCI {
         }
     }
 
+    public void removeDuplicateWithoutBuffer() {
+        LinkedListCCI current = this;
+        while (current != null) {
+            LinkedListCCI nextNode = current;
+            while (nextNode.next != null) {
+                if (current.val == nextNode.next.val) {
+                    nextNode.next = nextNode.next.next;
+                } else {
+                    nextNode = nextNode.next;
+                }
+            }
+            current = current.next;
+        }
+    }
+
     public void printAllLinkedListItem() {
         LinkedListCCI current = this;
         while (current != null) {
@@ -76,10 +91,10 @@ public class LinkedListCCI {
     }
 
     public static void main(String[] args) {
-        List<Integer> list = List.of(1, 3, 4, 6, 6, 7, 8, 9);
+        List<Integer> list = List.of(1, 3, 4, 6, 6, 6, 7, 8, 9, 9);
         LinkedListCCI linkedListCCI = new LinkedListCCI(5);
         linkedListCCI.createLinkedList(list);
-        linkedListCCI.removeDuplicatesBySets();
-        linkedListCCI.printAllLinkedListItem();
+        linkedListCCI.removeDuplicateWithoutBuffer();
+//        linkedListCCI.printAllLinkedListItem();
     }
 }
