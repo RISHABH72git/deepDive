@@ -93,6 +93,21 @@ public class LinkedListCCI {
         return list.get(list.size() - k);
     }
 
+    public LinkedListCCI returnKthToLastWithOutBuffer(int k) {
+        LinkedListCCI p1 = this;
+        LinkedListCCI p2 = this;
+        for (int i = 0; i < k; i++) {
+            if (p1 == null) return null;
+            p1 = p1.next;
+        }
+
+        while (p1 != null) {
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        return p2;
+    }
+
     public void printAllLinkedListItem() {
         LinkedListCCI current = this;
         while (current != null) {
@@ -110,5 +125,7 @@ public class LinkedListCCI {
         System.out.println("-------------------");
         LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
         System.out.println(kthElement.val);
+        LinkedListCCI kthElement2 = linkedListCCI.returnKthToLastWithOutBuffer(2);
+        System.out.println(kthElement2.val);
     }
 }
