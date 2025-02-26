@@ -108,6 +108,21 @@ public class LinkedListCCI {
         return p2;
     }
 
+    public void reverseLinkedListByList() {
+        LinkedListCCI current = this;
+        List<Integer> allList = new ArrayList<>();
+        while (current != null) {
+            allList.add(current.val);
+            current = current.next;
+        }
+        LinkedListCCI newCurrent = this;
+        newCurrent.val = allList.get(allList.size() - 1);
+        for (int i = allList.size() - 2; i >= 0; i--) {
+            newCurrent.next = new LinkedListCCI(allList.get(i));
+            newCurrent = newCurrent.next;
+        }
+    }
+
     public void printAllLinkedListItem() {
         LinkedListCCI current = this;
         while (current != null) {
@@ -121,11 +136,12 @@ public class LinkedListCCI {
         LinkedListCCI linkedListCCI = new LinkedListCCI(5);
         linkedListCCI.createLinkedList(list);
         linkedListCCI.removeDuplicateWithoutBuffer();
+        linkedListCCI.reverseLinkedListByList();
         linkedListCCI.printAllLinkedListItem();
-        System.out.println("-------------------");
-        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
-        System.out.println(kthElement.val);
-        LinkedListCCI kthElement2 = linkedListCCI.returnKthToLastWithOutBuffer(2);
-        System.out.println(kthElement2.val);
+//        System.out.println("-------------------");
+//        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
+//        System.out.println(kthElement.val);
+//        LinkedListCCI kthElement2 = linkedListCCI.returnKthToLastWithOutBuffer(2);
+//        System.out.println(kthElement2.val);
     }
 }
