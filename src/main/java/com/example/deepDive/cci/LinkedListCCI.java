@@ -8,6 +8,7 @@ import java.util.Set;
 public class LinkedListCCI {
     LinkedListCCI next;
     int val;
+    private LinkedListCCI head;
 
     public LinkedListCCI(int data) {
         this.val = data;
@@ -123,20 +124,20 @@ public class LinkedListCCI {
         }
     }
 
-    public LinkedListCCI reverseLinkedList(LinkedListCCI current) {
-        LinkedListCCI previous = new LinkedListCCI(current.val);
-        System.out.println(previous.val);
-        while (current.next != null) {
-            System.out.println(current.next.val);
-            previous.next = new LinkedListCCI(current.next.val);
-            previous = previous.next;
-            current = current.next;
+    public void reverseLinkedList() {
+        LinkedListCCI current = this;
+        LinkedListCCI previous = null;
+        while (current != null) {
+            LinkedListCCI nextNode = current.next;
+            current.next = previous;
+            previous = current;
+            current = nextNode;
         }
-        return previous;
+        head = previous;
     }
 
     public void printAllLinkedListItem() {
-        LinkedListCCI current = this;
+        LinkedListCCI current = head;
         while (current != null) {
             System.out.println(current.val);
             current = current.next;
@@ -149,12 +150,12 @@ public class LinkedListCCI {
         linkedListCCI.createLinkedList(list);
         linkedListCCI.removeDuplicateWithoutBuffer();
 //        linkedListCCI.reverseLinkedListByList();
-        LinkedListCCI reversed = linkedListCCI.reverseLinkedList(linkedListCCI);
+        linkedListCCI.reverseLinkedList();
 //        while (reversed != null) {
 //            System.out.println(reversed.val);
 //            reversed = reversed.next;
 //        }
-//        linkedListCCI.printAllLinkedListItem();
+        linkedListCCI.printAllLinkedListItem();
 //        System.out.println("-------------------");
 //        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
 //        System.out.println(kthElement.val);
