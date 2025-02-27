@@ -136,6 +136,14 @@ public class LinkedListCCI {
         head = previous;
     }
 
+    public void deleteHead() {
+        LinkedListCCI current = this;
+        if (current.next != null) {
+            current = current.next;
+        }
+        head = current;
+    }
+
     public void printAllLinkedListItem() {
         LinkedListCCI current = head;
         while (current != null) {
@@ -150,11 +158,12 @@ public class LinkedListCCI {
         linkedListCCI.createLinkedList(list);
         linkedListCCI.removeDuplicateWithoutBuffer();
 //        linkedListCCI.reverseLinkedListByList();
-        linkedListCCI.reverseLinkedList();
+//        linkedListCCI.reverseLinkedList();
 //        while (reversed != null) {
 //            System.out.println(reversed.val);
 //            reversed = reversed.next;
 //        }
+        linkedListCCI.deleteHead();
         linkedListCCI.printAllLinkedListItem();
 //        System.out.println("-------------------");
 //        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
