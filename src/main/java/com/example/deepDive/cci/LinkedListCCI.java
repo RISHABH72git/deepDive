@@ -154,11 +154,18 @@ public class LinkedListCCI {
     }
 
     public void deleteMiddleNode() {
-        LinkedListCCI fast = head;
         LinkedListCCI slow = head;
+        LinkedListCCI fast = slow;
+
         while (slow.next != null) {
-            if (fast.next == null || fast.next.next == null){
-                System.out.println(slow.val);
+            if (fast.next == null || fast.next.next == null) {
+                LinkedListCCI current = this.head;
+                while (current.next != null) {
+                    if (current.next.val == slow.val) {
+                        current.next = slow.next;
+                    }
+                    current = current.next;
+                }
                 break;
             }
             slow = slow.next;
@@ -178,7 +185,12 @@ public class LinkedListCCI {
 //            reversed = reversed.next;
 //        }
 //        linkedListCCI.deleteHead();
+//        LinkedListCCI listCCI =
         linkedListCCI.deleteMiddleNode();
+//        while (listCCI != null) {
+//            System.out.println(listCCI.val);
+//            listCCI = listCCI.next;
+//        }
         linkedListCCI.printAllLinkedListItem();
 //        System.out.println("-------------------");
 //        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
