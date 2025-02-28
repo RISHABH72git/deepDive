@@ -173,6 +173,20 @@ public class LinkedListCCI {
         }
     }
 
+    public void deleteMiddleNodeOptimize() {
+        LinkedListCCI dummy = new LinkedListCCI(0);
+        dummy.next = this.head;
+        LinkedListCCI fast = this.head;
+        LinkedListCCI slow = dummy;
+        this.head = dummy;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slow.next = slow.next.next;
+        this.head = dummy.next;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = List.of(2, 3, 4, 5, 6);
         LinkedListCCI linkedListCCI = new LinkedListCCI(1);
@@ -186,7 +200,7 @@ public class LinkedListCCI {
 //        }
 //        linkedListCCI.deleteHead();
 //        LinkedListCCI listCCI =
-        linkedListCCI.deleteMiddleNode();
+        linkedListCCI.deleteMiddleNodeOptimize();
 //        while (listCCI != null) {
 //            System.out.println(listCCI.val);
 //            listCCI = listCCI.next;
