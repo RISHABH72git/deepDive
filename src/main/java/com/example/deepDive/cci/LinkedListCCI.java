@@ -15,6 +15,12 @@ public class LinkedListCCI {
         this.head = this;
     }
 
+    public LinkedListCCI(int data, LinkedListCCI linkedListCCI) {
+        this.val = data;
+        this.head = this;
+        this.next = linkedListCCI;
+    }
+
     private void appendToTail(int data) {
         LinkedListCCI last = new LinkedListCCI(data);
         LinkedListCCI node = this;
@@ -48,6 +54,7 @@ public class LinkedListCCI {
 
     private LinkedListCCI createLinkedList(List<Integer> integerList) {
         LinkedListCCI head = this;
+        this.head = head;
         for (int i = 0; i < integerList.size(); i++) {
             head.next = new LinkedListCCI(integerList.get(i));
             head = head.next;
@@ -187,8 +194,29 @@ public class LinkedListCCI {
         this.head = dummy.next;
     }
 
+    public void partitionInLinkedList(int partition) {
+        LinkedListCCI current = this.head;
+        LinkedListCCI smallHead = new LinkedListCCI(0, current);
+        LinkedListCCI largerHead = new LinkedListCCI(0, current);
+        LinkedListCCI larger = largerHead;
+        LinkedListCCI smaller = smallHead;
+        while (current != null) {
+            if (current.val < partition) {
+                smaller.next = current;
+                smaller = smaller.next;
+            } else {
+                larger.next = current;
+                larger = larger.next;
+            }
+            current = current.next;
+        }
+        larger.next = null;
+        smaller.next = largerHead.next;
+        this.head = smallHead.next;
+    }
+
     public static void main(String[] args) {
-        List<Integer> list = List.of(2, 3, 4, 5, 6);
+        List<Integer> list = List.of(2, 2, 9, 4, 3, 5, 6, 5);
         LinkedListCCI linkedListCCI = new LinkedListCCI(1);
         linkedListCCI.createLinkedList(list);
 //        linkedListCCI.removeDuplicateWithoutBuffer();
@@ -200,11 +228,12 @@ public class LinkedListCCI {
 //        }
 //        linkedListCCI.deleteHead();
 //        LinkedListCCI listCCI =
-        linkedListCCI.deleteMiddleNodeOptimize();
+//        linkedListCCI.deleteMiddleNodeOptimize();
 //        while (listCCI != null) {
 //            System.out.println(listCCI.val);
 //            listCCI = listCCI.next;
 //        }
+        linkedListCCI.partitionInLinkedList(5);
         linkedListCCI.printAllLinkedListItem();
 //        System.out.println("-------------------");
 //        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
