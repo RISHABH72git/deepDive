@@ -215,9 +215,25 @@ public class LinkedListCCI {
         this.head = smallHead.next;
     }
 
+    public int sumLinKedList() {
+        List<Integer> list = new ArrayList<>();
+        LinkedListCCI current = this.head;
+        while (current != null) {
+            list.add(current.val);
+            current = current.next;
+        }
+        StringBuilder front = new StringBuilder();
+        StringBuilder last = new StringBuilder();
+        for (int i = 0; i < list.size() / 2; i++) {
+            front.append(list.get(i));
+            last.append(list.get(list.size() - 1 - i));
+        }
+        return Integer.parseInt(front.reverse().toString()) + Integer.parseInt(last.toString());
+    }
+
     public static void main(String[] args) {
-        List<Integer> list = List.of(2, 2, 9, 4, 3, 5, 6, 5);
-        LinkedListCCI linkedListCCI = new LinkedListCCI(1);
+        List<Integer> list = List.of(1, 6, 5, 9, 2);
+        LinkedListCCI linkedListCCI = new LinkedListCCI(7);
         linkedListCCI.createLinkedList(list);
 //        linkedListCCI.removeDuplicateWithoutBuffer();
 //        linkedListCCI.reverseLinkedListByList();
@@ -233,7 +249,8 @@ public class LinkedListCCI {
 //            System.out.println(listCCI.val);
 //            listCCI = listCCI.next;
 //        }
-        linkedListCCI.partitionInLinkedList(5);
+//        linkedListCCI.partitionInLinkedList(5);
+        System.out.println(linkedListCCI.sumLinKedList());
         linkedListCCI.printAllLinkedListItem();
 //        System.out.println("-------------------");
 //        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
