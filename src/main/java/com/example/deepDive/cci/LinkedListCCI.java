@@ -231,8 +231,19 @@ public class LinkedListCCI {
         return Integer.parseInt(front.reverse().toString()) + Integer.parseInt(last.toString());
     }
 
+    public boolean linkedListPalindrome() {
+        LinkedListCCI current = this.head;
+        StringBuilder stringBuilder = new StringBuilder();
+        while (current != null) {
+            stringBuilder.append(current.val);
+            current = current.next;
+        }
+        String currentFlow = stringBuilder.toString();
+        return currentFlow.equals(stringBuilder.reverse().toString());
+    }
+
     public static void main(String[] args) {
-        List<Integer> list = List.of(1, 6, 5, 9, 2);
+        List<Integer> list = List.of(1, 6, 6, 1, 7);
         LinkedListCCI linkedListCCI = new LinkedListCCI(7);
         linkedListCCI.createLinkedList(list);
 //        linkedListCCI.removeDuplicateWithoutBuffer();
@@ -250,7 +261,8 @@ public class LinkedListCCI {
 //            listCCI = listCCI.next;
 //        }
 //        linkedListCCI.partitionInLinkedList(5);
-        System.out.println(linkedListCCI.sumLinKedList());
+//        System.out.println(linkedListCCI.sumLinKedList());
+        System.out.println(linkedListCCI.linkedListPalindrome());
         linkedListCCI.printAllLinkedListItem();
 //        System.out.println("-------------------");
 //        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
