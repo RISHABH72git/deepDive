@@ -242,30 +242,31 @@ public class LinkedListCCI {
         return currentFlow.equals(stringBuilder.reverse().toString());
     }
 
-    public boolean linkedListPalindromeWithoutReverse() {
+    public boolean linkedListPalindromeWithReverse() {
         LinkedListCCI previous = null;
         LinkedListCCI current = this.head;
-        LinkedListCCI temp = current;
+        List<Integer> integerList = new ArrayList<>();
         while (current != null) {
+            integerList.add(current.val);
             LinkedListCCI nextNode = current.next;
             current.next = previous;
             previous = current;
             current = nextNode;
         }
-        while (temp != null) {
-            System.out.println(temp.val);
-            temp = temp.next;
-        }
-        System.out.println("--------");
+        System.out.println(integerList);
+        int count = 0;
         while (previous != null) {
-            System.out.println(previous.val);
+            if (integerList.get(count) != previous.val){
+                return false;
+            }
             previous = previous.next;
+            count++;
         }
         return true;
     }
 
     public static void main(String[] args) {
-        List<Integer> list = List.of(1, 6, 5, 1, 7);
+        List<Integer> list = List.of(1, 6, 6, 1, 7);
         LinkedListCCI linkedListCCI = new LinkedListCCI(7);
         linkedListCCI.createLinkedList(list);
 //        linkedListCCI.removeDuplicateWithoutBuffer();
@@ -284,7 +285,7 @@ public class LinkedListCCI {
 //        }
 //        linkedListCCI.partitionInLinkedList(5);
 //        System.out.println(linkedListCCI.sumLinKedList());
-        System.out.println(linkedListCCI.linkedListPalindromeWithoutReverse());
+        System.out.println(linkedListCCI.linkedListPalindromeWithReverse());
         linkedListCCI.printAllLinkedListItem();
 //        System.out.println("-------------------");
 //        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
