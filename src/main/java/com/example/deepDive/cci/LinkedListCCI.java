@@ -256,13 +256,23 @@ public class LinkedListCCI {
         System.out.println(integerList);
         int count = 0;
         while (previous != null) {
-            if (integerList.get(count) != previous.val){
+            if (integerList.get(count) != previous.val) {
                 return false;
             }
             previous = previous.next;
             count++;
         }
         return true;
+    }
+
+    public LinkedListCCI getIntersectionNode(LinkedListCCI headA, LinkedListCCI headB) {
+        LinkedListCCI pointerA = headA;
+        LinkedListCCI pointerB = headB;
+        while (pointerA != pointerB) {
+            pointerA = (pointerA == null) ? headB : pointerA.next;
+            pointerB = (pointerB == null) ? headA : pointerB.next;
+        }
+        return pointerA;
     }
 
     public static void main(String[] args) {
