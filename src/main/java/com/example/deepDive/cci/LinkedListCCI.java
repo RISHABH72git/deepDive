@@ -274,8 +274,19 @@ public class LinkedListCCI {
         }
         return pointerA;
     }
-    public boolean linkedListCycle(){
 
+    public boolean linkedListCycle() {
+        if (head == null) return false; // Edge case: Empty list
+        LinkedListCCI slow = this.head;
+        LinkedListCCI fast = this.head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void main(String[] args) {
@@ -298,7 +309,7 @@ public class LinkedListCCI {
 //        }
 //        linkedListCCI.partitionInLinkedList(5);
 //        System.out.println(linkedListCCI.sumLinKedList());
-        System.out.println(linkedListCCI.linkedListPalindromeWithReverse());
+        System.out.println(linkedListCCI.linkedListCycle());
         linkedListCCI.printAllLinkedListItem();
 //        System.out.println("-------------------");
 //        LinkedListCCI kthElement = linkedListCCI.returnKthToLast(2);
