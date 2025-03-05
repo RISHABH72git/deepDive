@@ -276,7 +276,7 @@ public class LinkedListCCI {
     }
 
     public boolean linkedListCycle() {
-        if (head == null) return false; // Edge case: Empty list
+        if (this.head == null) return false; // Edge case: Empty list
         LinkedListCCI slow = this.head;
         LinkedListCCI fast = this.head;
         while (fast != null && fast.next != null) {
