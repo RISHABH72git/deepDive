@@ -274,6 +274,9 @@ public class LinkedListCCI {
         }
         return pointerA;
     }
+    public boolean linkedListCycle(){
+
+    }
 
     public static void main(String[] args) {
         List<Integer> list = List.of(1, 6, 6, 1, 7);
