@@ -1,9 +1,10 @@
 package com.example.deepDive.cci;
 
 import java.util.EmptyStackException;
+import java.util.List;
 
 public class StacksAndQueues {
-    public class MyStack<T> {
+    public static class MyStack<T> {
         private static class StackNode<T> {
             private T data;
             private StackNode<T> next;
@@ -36,6 +37,24 @@ public class StacksAndQueues {
         public boolean isEmpty() {
             return top == null;
         }
+
+        public void printStack() {
+            while (top != null) {
+                System.out.println(top.data);
+                top = top.next;
+            }
+        }
+
+        public void insertData(List<T> list) {
+            for (T ele : list) {
+                push(ele);
+            }
+        }
     }
 
+    public static void main(String[] args) {
+        MyStack<Integer> myStack = new MyStack<Integer>();
+        myStack.insertData(List.of(1, 2, 3, 4, 5, 6));
+        myStack.printStack();
+    }
 }
