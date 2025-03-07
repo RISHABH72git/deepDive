@@ -2,6 +2,7 @@ package com.example.deepDive.cci;
 
 import java.util.EmptyStackException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class StacksAndQueues {
     public static class MyStack<T> {
@@ -49,6 +50,50 @@ public class StacksAndQueues {
             for (T ele : list) {
                 push(ele);
             }
+        }
+    }
+
+    public static class MyQueue<T> {
+        private static class MyQueueNode<T> {
+            private T data;
+            private MyQueueNode<T> next;
+
+            public MyQueueNode(T data) {
+                this.data = data;
+            }
+        }
+
+        private MyQueueNode<T> first;
+        private MyQueueNode<T> last;
+
+        public void add(T data) {
+            MyQueueNode<T> newQueue = new MyQueueNode<>(data);
+            if (last != null) {
+                last.next = newQueue;
+            }
+            last = newQueue;
+            if (first == null) {
+                first = last;
+            }
+        }
+
+        public T remove() {
+            if (first == null) throw new NoSuchElementException();
+            T data = first.data;
+            first = first.next;
+            if (first == null) {
+                last = null;
+            }
+            return data;
+        }
+
+        public T peek() {
+            if (first == null) throw new NoSuchElementException();
+            return first.data;
+        }
+
+        public boolean isEmpty() {
+            return first == null;
         }
     }
 
