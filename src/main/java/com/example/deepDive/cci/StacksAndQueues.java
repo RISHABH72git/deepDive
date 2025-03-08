@@ -128,6 +128,11 @@ public class StacksAndQueues {
 //        myStack.printStack();
         TripleStack tripleStack = new TripleStack();
         tripleStack.push(1, 5);
+        tripleStack.push(2, 55);
+        tripleStack.push(3, 6);
+        tripleStack.push(1, 99);
+        tripleStack.push(2, 33);
+        tripleStack.push(3, 23);
         tripleStack.peek(1);
     }
 }
