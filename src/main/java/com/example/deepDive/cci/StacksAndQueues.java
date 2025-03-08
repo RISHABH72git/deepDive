@@ -1,5 +1,6 @@
 package com.example.deepDive.cci;
 
+import java.util.Arrays;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -53,6 +54,30 @@ public class StacksAndQueues {
         }
     }
 
+    public static class TripleStack {
+        int[] capacity = new int[15];
+        int size = 5;
+        int[] top = new int[]{4, 9, 14};
+
+        public void push(int stack, int data) {
+            int index = top[stack - 1];
+            capacity[index] = data;
+            top[stack - 1] = index - 1;
+        }
+
+        public int peek(int stack) {
+            if (top[stack - 1] == ((size * stack) - 1)) throw new EmptyStackException();
+            System.out.println(Arrays.toString(capacity));
+            System.out.println(Arrays.toString(top));
+            System.out.println(capacity[top[stack - 1] + 1]);
+            return capacity[top[stack - 1] + 1];
+        }
+
+        public boolean isEmpty(int stack) {
+            return top[stack - 1] == ((size * stack) - 1);
+        }
+    }
+
     public static class MyQueue<T> {
         private static class MyQueueNode<T> {
             private T data;
@@ -98,8 +123,11 @@ public class StacksAndQueues {
     }
 
     public static void main(String[] args) {
-        MyStack<Integer> myStack = new MyStack<Integer>();
-        myStack.insertData(List.of(1, 2, 3, 4, 5, 6));
-        myStack.printStack();
+//        MyStack<Integer> myStack = new MyStack<Integer>();
+//        myStack.insertData(List.of(1, 2, 3, 4, 5, 6));
+//        myStack.printStack();
+        TripleStack tripleStack = new TripleStack();
+        tripleStack.push(1, 5);
+        tripleStack.peek(1);
     }
 }
