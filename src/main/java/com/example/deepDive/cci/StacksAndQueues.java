@@ -60,6 +60,10 @@ public class StacksAndQueues {
         int[] top = new int[]{4, 9, 14};
 
         public void push(int stack, int data) {
+            if (top[stack-1] < ((size*stack)-size)){
+                System.out.println("stack is already full");
+                return;
+            }
             int index = top[stack - 1];
             capacity[index] = data;
             top[stack - 1] = index - 1;
@@ -128,11 +132,11 @@ public class StacksAndQueues {
 //        myStack.printStack();
         TripleStack tripleStack = new TripleStack();
         tripleStack.push(1, 5);
-        tripleStack.push(2, 55);
-        tripleStack.push(3, 6);
+        tripleStack.push(1, 55);
+        tripleStack.push(1, 6);
         tripleStack.push(1, 99);
-        tripleStack.push(2, 33);
-        tripleStack.push(3, 23);
+        tripleStack.push(1, 33);
+        tripleStack.push(1, 23);
         tripleStack.peek(1);
     }
 }
