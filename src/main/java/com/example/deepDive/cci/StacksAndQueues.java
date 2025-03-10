@@ -77,6 +77,10 @@ public class StacksAndQueues {
             return capacity[top[stack - 1] + 1];
         }
 
+        public int pop(int stack){
+            return top[stack-1]++;
+        }
+
         public boolean isEmpty(int stack) {
             return top[stack - 1] == ((size * stack) - 1);
         }
