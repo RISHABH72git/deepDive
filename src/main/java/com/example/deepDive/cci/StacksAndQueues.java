@@ -78,6 +78,7 @@ public class StacksAndQueues {
         }
 
         public int pop(int stack){
+            if (top[stack - 1] == ((size * stack) - 1)) throw new EmptyStackException();
             return top[stack-1]++;
         }
 
