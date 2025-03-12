@@ -40,6 +40,18 @@ public class StacksAndQueues {
             return top == null;
         }
 
+        public int minElement() {
+            if (top == null) throw new EmptyStackException();
+            Integer min = Integer.MAX_VALUE;
+            while (top != null) {
+                if (min > (Integer) top.data) {
+                    min = (Integer) top.data;
+                }
+                top = top.next;
+            }
+            return min;
+        }
+
         public void printStack() {
             while (top != null) {
                 System.out.println(top.data);
@@ -60,7 +72,7 @@ public class StacksAndQueues {
         int[] top = new int[]{4, 9, 14};
 
         public void push(int stack, int data) {
-            if (top[stack-1] < ((size*stack)-size)){
+            if (top[stack - 1] < ((size * stack) - size)) {
                 System.out.println("stack is already full");
                 return;
             }
@@ -77,9 +89,9 @@ public class StacksAndQueues {
             return capacity[top[stack - 1] + 1];
         }
 
-        public int pop(int stack){
+        public int pop(int stack) {
             if (top[stack - 1] == ((size * stack) - 1)) throw new EmptyStackException();
-            return top[stack-1]++;
+            return top[stack - 1]++;
         }
 
         public boolean isEmpty(int stack) {
@@ -132,16 +144,17 @@ public class StacksAndQueues {
     }
 
     public static void main(String[] args) {
-//        MyStack<Integer> myStack = new MyStack<Integer>();
-//        myStack.insertData(List.of(1, 2, 3, 4, 5, 6));
+        MyStack<Integer> myStack = new MyStack<Integer>();
+        myStack.insertData(List.of(1, 2, 3, 4, 5, 6));
+        System.out.println(myStack.minElement());
 //        myStack.printStack();
-        TripleStack tripleStack = new TripleStack();
-        tripleStack.push(1, 5);
-        tripleStack.push(1, 55);
-        tripleStack.push(1, 6);
-        tripleStack.push(1, 99);
-        tripleStack.push(1, 33);
-        tripleStack.push(1, 23);
-        tripleStack.peek(1);
+//        TripleStack tripleStack = new TripleStack();
+//        tripleStack.push(1, 5);
+//        tripleStack.push(1, 55);
+//        tripleStack.push(1, 6);
+//        tripleStack.push(1, 99);
+//        tripleStack.push(1, 33);
+//        tripleStack.push(1, 23);
+//        tripleStack.peek(1);
     }
 }
