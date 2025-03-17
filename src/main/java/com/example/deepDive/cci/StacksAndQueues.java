@@ -19,6 +19,7 @@ public class StacksAndQueues {
         private StackNode<T> top;
 
         Integer min = Integer.MAX_VALUE;
+        Integer max = Integer.MIN_VALUE;
 
         public T pop() {
             if (top == null) throw new EmptyStackException();
@@ -31,6 +32,9 @@ public class StacksAndQueues {
             StackNode<T> t = new StackNode<T>(data);
             if (min > (Integer) data) {
                 min = (Integer) data;
+            }
+            if (max < (Integer) data) {
+                max = (Integer) data;
             }
             t.next = top;
             top = t;
@@ -150,8 +154,9 @@ public class StacksAndQueues {
 
     public static void main(String[] args) {
         MyStack<Integer> myStack = new MyStack<Integer>();
-        myStack.insertData(List.of(7, 2, 3, 4, 5, 6));
+        myStack.insertData(List.of(7, 2, 3, 4, 5, 6, 0, 4, 88));
         System.out.println(myStack.min);
+        System.out.println(myStack.max);
 //        System.out.println(myStack.minElement());
 //        myStack.printStack();
 //        TripleStack tripleStack = new TripleStack();
