@@ -152,11 +152,42 @@ public class StacksAndQueues {
         }
     }
 
+    public static class TwoStackQueue {
+        MyStack<Integer> newStack, oldStack;
+
+        public TwoStackQueue() {
+            newStack = new MyStack<>();
+            oldStack = new MyStack<>();
+        }
+
+        public void push(Integer data) {
+            newStack.push(data);
+        }
+
+        private void shiftStacks() {
+            if (!newStack.isEmpty()) {
+                while (!newStack.isEmpty()) {
+                    oldStack.push(newStack.pop());
+                }
+            }
+        }
+
+        public Integer peek() {
+            shiftStacks();
+            return oldStack.top.data;
+        }
+
+        public Integer remove() {
+            shiftStacks();
+            return oldStack.pop();
+        }
+    }
+
     public static void main(String[] args) {
-        MyStack<Integer> myStack = new MyStack<Integer>();
-        myStack.insertData(List.of(7, 2, 3, 4, 5, 6, 0, 4, 88));
-        System.out.println(myStack.min);
-        System.out.println(myStack.max);
+//        MyStack<Integer> myStack = new MyStack<Integer>();
+//        myStack.insertData(List.of(7, 2, 3, 4, 5, 6, 0, 4, 88));
+//        System.out.println(myStack.min);
+//        System.out.println(myStack.max);
 //        System.out.println(myStack.minElement());
 //        myStack.printStack();
 //        TripleStack tripleStack = new TripleStack();
@@ -167,5 +198,15 @@ public class StacksAndQueues {
 //        tripleStack.push(1, 33);
 //        tripleStack.push(1, 23);
 //        tripleStack.peek(1);
+        TwoStackQueue twoStackQueue = new TwoStackQueue();
+        twoStackQueue.push(2);
+        twoStackQueue.push(4);
+//        twoStackQueue.push(5);
+//        twoStackQueue.push(6);
+        System.out.println(twoStackQueue.peek());
+        twoStackQueue.remove();
+        System.out.println(twoStackQueue.peek());
+        twoStackQueue.remove();
+        System.out.println(twoStackQueue.peek());
     }
 }
