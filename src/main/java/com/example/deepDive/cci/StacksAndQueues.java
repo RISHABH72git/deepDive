@@ -21,10 +21,13 @@ public class StacksAndQueues {
         Integer min = Integer.MAX_VALUE;
         Integer max = Integer.MIN_VALUE;
 
+        Integer size = 0;
+
         public T pop() {
             if (top == null) throw new EmptyStackException();
             T item = this.top.data;
             this.top = this.top.next;
+            size--;
             return item;
         }
 
@@ -38,6 +41,7 @@ public class StacksAndQueues {
             }
             t.next = top;
             top = t;
+            size++;
         }
 
         public T peek() {
@@ -184,8 +188,10 @@ public class StacksAndQueues {
     }
 
     public static void main(String[] args) {
-//        MyStack<Integer> myStack = new MyStack<Integer>();
-//        myStack.insertData(List.of(7, 2, 3, 4, 5, 6, 0, 4, 88));
+        MyStack<Integer> myStack = new MyStack<Integer>();
+        myStack.insertData(List.of(7, 2, 3, 4, 5, 6, 0, 4));
+        myStack.pop();
+        System.out.println(myStack.size);
 //        System.out.println(myStack.min);
 //        System.out.println(myStack.max);
 //        System.out.println(myStack.minElement());
@@ -198,15 +204,15 @@ public class StacksAndQueues {
 //        tripleStack.push(1, 33);
 //        tripleStack.push(1, 23);
 //        tripleStack.peek(1);
-        TwoStackQueue twoStackQueue = new TwoStackQueue();
-        twoStackQueue.push(2);
-        twoStackQueue.push(4);
+//        TwoStackQueue twoStackQueue = new TwoStackQueue();
+//        twoStackQueue.push(2);
+//        twoStackQueue.push(4);
 //        twoStackQueue.push(5);
 //        twoStackQueue.push(6);
-        System.out.println(twoStackQueue.peek());
-        twoStackQueue.remove();
-        System.out.println(twoStackQueue.peek());
-        twoStackQueue.remove();
-        System.out.println(twoStackQueue.peek());
+//        System.out.println(twoStackQueue.peek());
+//        twoStackQueue.remove();
+//        System.out.println(twoStackQueue.peek());
+//        twoStackQueue.remove();
+//        System.out.println(twoStackQueue.peek());
     }
 }
