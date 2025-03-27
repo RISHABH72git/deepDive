@@ -1,9 +1,6 @@
 package com.example.deepDive.cci;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GraphCCI {
     class NodeGraph {
@@ -44,14 +41,51 @@ public class GraphCCI {
         }
     }
 
+    public static int shortestPath(Map<String, NodeGraph> graph, String start, String end) {
+        ArrayDeque<String> queue = new ArrayDeque<>();
+        queue.add(start);
+        HashSet<String> visited = new HashSet<>();
+        visited.add(start);
+        int level = 0;
+        while (queue.size() > 0) {
+            int n = queue.size();
+            for (int i = 0; i < n; i++) {
+                String node = queue.pop();
+                if (node == end) return level;
+                for (NodeGraph child : graph.get(node).children) {
+                    if (visited.contains(child.name)) {
+                        continue;
+                    }
+                    queue.add(child.name);
+                    visited.add(child.name);
+                }
+            }
+            level++;
+        }
+        return level;
+    }
+
     public static void main(String[] arg) {
         GraphCCI graphCCI = new GraphCCI();
-        graphCCI.addNode("A");
-        graphCCI.addNode("B");
-        graphCCI.addNode("C");
+        graphCCI.addNode("0");
+        graphCCI.addNode("1");
+        graphCCI.addNode("2");
+        graphCCI.addNode("3");
 
-        graphCCI.addEdge("A", "B");
-        graphCCI.addEdge("A", "C");
+        graphCCI.addEdge("0", "1");
+        graphCCI.addEdge("0", "2");
+
+        graphCCI.addEdge("1", "0");
+        graphCCI.addEdge("1", "2");
+        graphCCI.addEdge("1", "3");
+
+        graphCCI.addEdge("2", "0");
+        graphCCI.addEdge("2", "1");
+
+        graphCCI.addEdge("3", "1");
+
         graphCCI.printGraph();
+        int level = GraphCCI.shortestPath(graphCCI.nodes, "0", "3");
+        System.out.println(level);
     }
 }
