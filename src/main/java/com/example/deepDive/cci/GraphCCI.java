@@ -51,7 +51,7 @@ public class GraphCCI {
             int n = queue.size();
             for (int i = 0; i < n; i++) {
                 String node = queue.pop();
-                if (node == end) return level;
+                if (node.equals(end)) return level;
                 for (NodeGraph child : graph.get(node).children) {
                     if (visited.contains(child.name)) {
                         continue;
