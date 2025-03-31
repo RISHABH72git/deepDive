@@ -58,6 +58,24 @@ public class BinarySearchTree {
         }
     }
 
+    public static void listOfDepth(Node root) {
+        ArrayDeque<Node> deque = new ArrayDeque<>();
+        deque.add(root);
+        List<LinkedListNode<Integer>> depthList = new ArrayList<>();
+        while (!deque.isEmpty()) {
+            int n = deque.size();
+            for (int i = 0; i < n; i++) {
+                Node node = deque.pop();
+                if (node.right != null) {
+                    deque.add(node.right);
+                }
+                if (node.left != null) {
+                    deque.add(node.left);
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
 //        Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
 //        Node right = new Node(6, null, null);
