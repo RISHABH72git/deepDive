@@ -1,5 +1,7 @@
 package com.example.deepDive.algoMonster;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BinarySearchTree {
@@ -25,14 +27,34 @@ public class BinarySearchTree {
         inOrder(root.right);
     }
 
-    public static void createBinarySearchTree(List<Integer> uniqueElements) {
-        int mid = uniqueElements.size() / 2;
-        Node root = new Node(uniqueElements.get(mid), null, null);
-        for (int i = 0; i < mid; i++) {
-            insert(root, uniqueElements.get(i));
+    public static Node createBinarySearchTree(List<Integer> uniqueElements, int start, int end) {
+        if (start > end) {
+            return null;
         }
-        for (int i = mid + 1; i < uniqueElements.size(); i++) {
-            insert(root, uniqueElements.get(i));
+        int mid = start + (end - start) / 2;
+        Node treeNode = new Node(uniqueElements.get(mid), null, null);
+        treeNode.left = createBinarySearchTree(uniqueElements, start, mid - 1);
+        treeNode.right = createBinarySearchTree(uniqueElements, mid + 1, end);
+        return treeNode;
+    }
+
+    public static void printLevel(Node root) {
+        ArrayDeque<Node> deque = new ArrayDeque<>();
+        deque.add(root);
+        while (!deque.isEmpty()) {
+            int n = deque.size();
+            ArrayList<Integer> level = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                Node node = deque.pop();
+                level.add(node.val);
+                if (node.left != null) {
+                    deque.add(node.left);
+                }
+                if (node.right != null) {
+                    deque.add(node.right);
+                }
+            }
+            System.out.println(level);
         }
     }
 
@@ -42,6 +64,7 @@ public class BinarySearchTree {
 //        Node node = new Node(5, left, right);
 //        inOrder(insert(node, 10));
         List<Integer> uniqueElementSortedOrder = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        createBinarySearchTree(uniqueElementSortedOrder);
+        Node root = createBinarySearchTree(uniqueElementSortedOrder, 0, uniqueElementSortedOrder.size() - 1);
+        printLevel(root);
     }
 }
