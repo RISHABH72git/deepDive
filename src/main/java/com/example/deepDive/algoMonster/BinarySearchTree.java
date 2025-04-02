@@ -64,8 +64,14 @@ public class BinarySearchTree {
         List<LinkedListNode<Integer>> depthList = new ArrayList<>();
         while (!deque.isEmpty()) {
             int n = deque.size();
+            LinkedListNode<Integer> level = null;
             for (int i = 0; i < n; i++) {
                 Node node = deque.pop();
+                if (level == null){
+                    level = new LinkedListNode<>(node.val);
+                }else {
+                    level.next = new LinkedListNode<>(node.val);
+                }
                 if (node.right != null) {
                     deque.add(node.right);
                 }
@@ -73,6 +79,7 @@ public class BinarySearchTree {
                     deque.add(node.left);
                 }
             }
+            depthList.add(level);
         }
     }
 
@@ -84,5 +91,6 @@ public class BinarySearchTree {
         List<Integer> uniqueElementSortedOrder = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Node root = createBinarySearchTree(uniqueElementSortedOrder, 0, uniqueElementSortedOrder.size() - 1);
         printLevel(root);
+        listOfDepth(root);
     }
 }
