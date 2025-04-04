@@ -67,9 +67,9 @@ public class BinarySearchTree {
             LinkedListNode<Integer> level = null;
             for (int i = 0; i < n; i++) {
                 Node node = deque.pop();
-                if (level == null){
+                if (level == null) {
                     level = new LinkedListNode<>(node.val);
-                }else {
+                } else {
                     level.next = new LinkedListNode<>(node.val);
                 }
                 if (node.right != null) {
@@ -81,6 +81,22 @@ public class BinarySearchTree {
             }
             depthList.add(level);
         }
+    }
+
+    public static void listOfDepthByDfs(Node root) {
+        List<LinkedListNode<Integer>> mainList = new ArrayList<>();
+        createLevelLinkedList(mainList, 0, root);
+    }
+
+    private static void createLevelLinkedList(List<LinkedListNode<Integer>> list, int level, Node root) {
+        if (root == null) {
+            return;
+        }
+        LinkedListNode<Integer> localList = null;
+        if (list.size() == level){
+            localList = new LinkedListNode<Integer>();
+        }
+
     }
 
     public static void main(String[] args) {
