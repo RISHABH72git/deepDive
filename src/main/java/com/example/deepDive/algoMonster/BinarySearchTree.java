@@ -83,20 +83,23 @@ public class BinarySearchTree {
         }
     }
 
-    public static void listOfDepthByDfs(Node root) {
-        List<LinkedListNode<Integer>> mainList = new ArrayList<>();
-        createLevelLinkedList(mainList, 0, root);
+    public static int treeHeight(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftHeight = treeHeight(root.left);
+        int rightHeight = treeHeight(root.right);
+        if (leftHeight == -1 || rightHeight == -1) {
+            return -1;
+        }
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
+        }
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
-    private static void createLevelLinkedList(List<LinkedListNode<Integer>> list, int level, Node root) {
-        if (root == null) {
-            return;
-        }
-        LinkedListNode<Integer> localList = null;
-        if (list.size() == level){
-            localList = new LinkedListNode<Integer>();
-        }
-
+    public static boolean balancedTree(Node root) {
+        return treeHeight(root) != -1;
     }
 
     public static void main(String[] args) {
@@ -107,6 +110,6 @@ public class BinarySearchTree {
         List<Integer> uniqueElementSortedOrder = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Node root = createBinarySearchTree(uniqueElementSortedOrder, 0, uniqueElementSortedOrder.size() - 1);
         printLevel(root);
-        listOfDepth(root);
+        System.out.println(balancedTree(root));
     }
 }
