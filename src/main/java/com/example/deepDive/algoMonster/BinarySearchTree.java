@@ -112,6 +112,26 @@ public class BinarySearchTree {
         return validBinarySearchTree(root.left, min, root.val) && validBinarySearchTree(root.right, root.val, max);
     }
 
+    public static Node inOrderSuccessor(Node root){
+        if (root == null){
+            return null;
+        }
+        if (root.right != null){
+            return leftMostChild(root.right);
+        }
+        return root;
+    }
+
+    private static Node leftMostChild(Node right) {
+        if (right == null){
+            return null;
+        }
+        while(right.left != null){
+            right = right.left;
+        }
+        return right;
+    }
+
     public static void main(String[] args) {
 //        Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
 //        Node right = new Node(6, null, null);
@@ -122,5 +142,7 @@ public class BinarySearchTree {
         printLevel(root);
         System.out.println(balancedTree(root));
         System.out.println(validBinarySearchTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
+        Node successor = inOrderSuccessor(root);
+        System.out.println(successor.val);
     }
 }
