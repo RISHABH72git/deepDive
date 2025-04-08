@@ -78,21 +78,24 @@ public class GraphCCI {
     }
 
     public void getBuildOrder() {
-        Set<String> order = new HashSet<>();
-        Set<String> tem = new HashSet<>();
-        for (NodeGraph node : nodes.values()) {
-            order.add(node.name);
-            for (NodeGraph parent : nodes.values()) {
-                for (NodeGraph child : parent.children) {
-                    if (order.contains(child.name)) {
-                        order.remove(child.name);
-                        tem.add(child.name);
+        ArrayDeque<String> deque = new ArrayDeque<>();
+        deque.add(nodes.get(0).name);
+        HashSet<String> visited = new HashSet<>();
+        visited.add(nodes.get(0).name);
+        while (!deque.isEmpty()) {
+            int n = deque.size();
+            for (int i = 0; i < n; i++) {
+                String node = deque.pop();
+                for (NodeGraph child : nodes.get(node).children) {
+                    if (visited.contains(child.name)){
+                        continue;
                     }
+                    deque.add(child.name);
+                    visited.add(child.name);
                 }
             }
         }
-        System.out.println(order);
-        System.out.println(tem);
+        System.out.println(visited);
     }
 
     public static void main(String[] arg) {
