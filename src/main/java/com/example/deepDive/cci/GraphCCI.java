@@ -77,6 +77,24 @@ public class GraphCCI {
         return graphCCI;
     }
 
+    public void getBuildOrder() {
+        Set<String> order = new HashSet<>();
+        Set<String> tem = new HashSet<>();
+        for (NodeGraph node : nodes.values()) {
+            order.add(node.name);
+            for (NodeGraph parent : nodes.values()) {
+                for (NodeGraph child : parent.children) {
+                    if (order.contains(child.name)) {
+                        order.remove(child.name);
+                        tem.add(child.name);
+                    }
+                }
+            }
+        }
+        System.out.println(order);
+        System.out.println(tem);
+    }
+
     public static void main(String[] arg) {
 //        GraphCCI graphCCI = new GraphCCI();
 //        graphCCI.addNode("0");
@@ -99,6 +117,7 @@ public class GraphCCI {
         List<List<String>> dependencies = List.of(List.of("a", "b"), List.of("f", "b"), List.of("b", "d"), List.of("f", "a"), List.of("d", "c"));
         GraphCCI graphCCI = GraphCCI.buildGraph(projects, dependencies);
         graphCCI.printGraph();
+        graphCCI.getBuildOrder();
 //        int level = GraphCCI.shortestPath(graphCCI.nodes, "0", "3");
 //        System.out.println(level);
     }
