@@ -77,26 +77,26 @@ public class GraphCCI {
         return graphCCI;
     }
 
-    public void getBuildOrder() {
-        ArrayDeque<String> deque = new ArrayDeque<>();
-        deque.add(nodes.get(0).name);
-        HashSet<String> visited = new HashSet<>();
-        visited.add(nodes.get(0).name);
-        while (!deque.isEmpty()) {
-            int n = deque.size();
-            for (int i = 0; i < n; i++) {
-                String node = deque.pop();
-                for (NodeGraph child : nodes.get(node).children) {
-                    if (visited.contains(child.name)){
-                        continue;
-                    }
-                    deque.add(child.name);
-                    visited.add(child.name);
-                }
-            }
-        }
-        System.out.println(visited);
-    }
+//    public void getBuildOrder() {
+//        ArrayDeque<String> deque = new ArrayDeque<>();
+//        deque.add(root.get(0).name);
+//        HashSet<String> visited = new HashSet<>();
+//        visited.add(root.get(0).name);
+//        while (!deque.isEmpty()) {
+//            int n = deque.size();
+//            for (int i = 0; i < n; i++) {
+//                String node = deque.pop();
+//                for (NodeGraph child : root.get(node).children) {
+//                    if (visited.contains(child.name)){
+//                        continue;
+//                    }
+//                    deque.add(child.name);
+//                    visited.add(child.name);
+//                }
+//            }
+//        }
+//        System.out.println(visited);
+//    }
 
     public static void main(String[] arg) {
 //        GraphCCI graphCCI = new GraphCCI();
@@ -120,7 +120,7 @@ public class GraphCCI {
         List<List<String>> dependencies = List.of(List.of("a", "b"), List.of("f", "b"), List.of("b", "d"), List.of("f", "a"), List.of("d", "c"));
         GraphCCI graphCCI = GraphCCI.buildGraph(projects, dependencies);
         graphCCI.printGraph();
-        graphCCI.getBuildOrder();
+//        graphCCI.getBuildOrder();
 //        int level = GraphCCI.shortestPath(graphCCI.nodes, "0", "3");
 //        System.out.println(level);
     }
