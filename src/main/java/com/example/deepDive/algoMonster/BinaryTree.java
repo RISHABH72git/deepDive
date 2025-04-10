@@ -55,6 +55,13 @@ public class BinaryTree {
         return sum;
     }
 
+    public static Node invertBinaryTree(Node root){
+        if (root == null){
+            return null;
+        }
+        return new Node(root.val, invertBinaryTree(root.right), invertBinaryTree(root.left));
+    }
+
     public static void main(String[] arg) {
         Node left = new Node(4, new Node(3, null, null), new Node(8, null, null));
         Node right = new Node(6, null, null);
@@ -69,5 +76,6 @@ public class BinaryTree {
         System.out.println(sumBinaryTreeValue(node));
         System.out.println("---------------------------------------");
         System.out.println(sumBinaryTreeByStack(node));
+        System.out.println(invertBinaryTree(node));
     }
 }
