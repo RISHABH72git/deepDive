@@ -3,6 +3,7 @@ package com.example.deepDive.algoMonster;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class BinarySearchTree {
 
@@ -112,24 +113,44 @@ public class BinarySearchTree {
         return validBinarySearchTree(root.left, min, root.val) && validBinarySearchTree(root.right, root.val, max);
     }
 
-    public static Node inOrderSuccessor(Node root){
-        if (root == null){
+    public static Node inOrderSuccessor(Node root) {
+        if (root == null) {
             return null;
         }
-        if (root.right != null){
+        if (root.right != null) {
             return leftMostChild(root.right);
         }
         return root;
     }
 
     private static Node leftMostChild(Node right) {
-        if (right == null){
+        if (right == null) {
             return null;
         }
-        while(right.left != null){
+        while (right.left != null) {
             right = right.left;
         }
         return right;
+    }
+
+    public static List<Integer> bstSequenceLeft(Node root, List<Integer> list) {
+        if (root == null) {
+            return list;
+        }
+        list.add(root.val);
+        bstSequenceLeft(root.left, list);
+        bstSequenceLeft(root.right, list);
+        return list;
+    }
+
+    public static List<Integer> bstSequenceRight(Node root, List<Integer> list) {
+        if (root == null) {
+            return list;
+        }
+        list.add(root.val);
+        bstSequenceRight(root.right, list);
+        bstSequenceRight(root.left, list);
+        return list;
     }
 
     public static void main(String[] args) {
@@ -142,7 +163,12 @@ public class BinarySearchTree {
         printLevel(root);
         System.out.println(balancedTree(root));
         System.out.println(validBinarySearchTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
-        Node successor = inOrderSuccessor(root);
-        System.out.println(successor.val);
+//        Node successor = inOrderSuccessor(root);
+//        System.out.println(successor.val);
+        System.out.println("---------------------------------");
+        List<Integer> leftSequence = bstSequenceLeft(root, new ArrayList<>());
+        List<Integer> rightSequence = bstSequenceRight(root, new ArrayList<>());
+        System.out.println(leftSequence);
+        System.out.println(rightSequence);
     }
 }
