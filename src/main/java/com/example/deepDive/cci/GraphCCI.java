@@ -99,23 +99,23 @@ public class GraphCCI {
     }
 
     public static void main(String[] arg) {
-//        GraphCCI graphCCI = new GraphCCI();
-//        graphCCI.addNode("0");
-//        graphCCI.addNode("1");
-//        graphCCI.addNode("2");
-//        graphCCI.addNode("3");
-//
-//        graphCCI.addEdge("0", "1");
-//        graphCCI.addEdge("0", "2");
-//
-//        graphCCI.addEdge("1", "0");
-//        graphCCI.addEdge("1", "2");
-//        graphCCI.addEdge("1", "3");
-//
-//        graphCCI.addEdge("2", "0");
-//        graphCCI.addEdge("2", "1");
-//
-//        graphCCI.addEdge("3", "1");
+        GraphCCI graphCCI = new GraphCCI();
+        graphCCI.addNode("0");
+        graphCCI.addNode("1");
+        graphCCI.addNode("2");
+        graphCCI.addNode("3");
+
+        graphCCI.addEdge("0", "1");
+        graphCCI.addEdge("0", "2");
+
+        graphCCI.addEdge("1", "0");
+        graphCCI.addEdge("1", "2");
+        graphCCI.addEdge("1", "3");
+
+        graphCCI.addEdge("2", "0");
+        graphCCI.addEdge("2", "1");
+
+        graphCCI.addEdge("3", "1");
         List<String> projects = List.of("a", "b", "c", "d", "e", "f");
         List<List<String>> dependencies = List.of(List.of("a", "b"), List.of("f", "b"), List.of("b", "d"), List.of("f", "a"), List.of("d", "c"));
         GraphCCI graphCCI = GraphCCI.buildGraph(projects, dependencies);
