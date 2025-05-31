@@ -118,10 +118,10 @@ public class GraphCCI {
         graphCCI.addEdge("3", "1");
         List<String> projects = List.of("a", "b", "c", "d", "e", "f");
         List<List<String>> dependencies = List.of(List.of("a", "b"), List.of("f", "b"), List.of("b", "d"), List.of("f", "a"), List.of("d", "c"));
-        GraphCCI graphCCI = GraphCCI.buildGraph(projects, dependencies);
-        graphCCI.printGraph();
-        graphCCI.getBuildOrder();
-        int level = GraphCCI.shortestPath(graphCCI.nodes, "0", "3");
-        System.out.println(level);
+//        GraphCCI graphCCI = GraphCCI.buildGraph(projects, dependencies);
+//        graphCCI.printGraph();
+//        graphCCI.getBuildOrder();
+//        int level = GraphCCI.shortestPath(graphCCI.nodes, "0", "3");
+//        System.out.println(level);
     }
 }
