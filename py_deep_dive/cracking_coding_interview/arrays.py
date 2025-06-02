@@ -32,8 +32,27 @@ class Arrays:
                 return False
         return True
 
+    @staticmethod
+    def check_permutation_given_two_strings_without_sorted(string1, string2):
+        if len(string1) != len(string2):
+            return False
+        str_feq = {}
+        for i in string1:
+            if i in str_feq:
+                str_feq[i] = str_feq.get(i)+1
+            else:
+                str_feq[i] = 1
+
+        for i in string2:
+            if i in str_feq:
+                str_feq[i] = str_feq.get(i) - 1
+            else:
+                return False
+
+        return True
+
 
 if __name__ == "__main__":
     print("Hello World")
     arrays = Arrays()
-    print(arrays.check_permutation_given_two_strings("hello", "heljk"))
+    print(arrays.check_permutation_given_two_strings_without_sorted("hello", "helao"))
