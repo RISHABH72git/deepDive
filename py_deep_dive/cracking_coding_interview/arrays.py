@@ -51,8 +51,21 @@ class Arrays:
 
         return True
 
+    @staticmethod
+    def urify_the_string(demo):
+        new_demo = ''
+        pre_counter = ''
+        for i in demo:
+            if i == " " and pre_counter != '%20':
+                new_demo += "%20"
+                pre_counter = '%20'
+            elif i != " ":
+                new_demo += i
+                pre_counter = i
+        print(new_demo)
+
 
 if __name__ == "__main__":
     print("Hello World")
     arrays = Arrays()
-    print(arrays.check_permutation_given_two_strings_without_sorted("hello", "helao"))
+    print(arrays.urify_the_string(" Mr hi    this  "))
